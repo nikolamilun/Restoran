@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IRestoran.cs" />
+    <Compile Include="Izuzetak.cs" />
     <Compile Include="Jelo.cs" />
     <Compile Include="Meni.cs" />
     <Compile Include="NaMeniju.cs" />

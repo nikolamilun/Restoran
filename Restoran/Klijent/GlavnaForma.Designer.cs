@@ -41,7 +41,28 @@ namespace Klijent
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabContTabele = new System.Windows.Forms.TabControl();
+            this.meniTab = new System.Windows.Forms.TabPage();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.btnDodajRedMeni = new System.Windows.Forms.Button();
+            this.btnObrisiRedMeni = new System.Windows.Forms.Button();
+            this.txtNazivMenijaMeni = new System.Windows.Forms.TextBox();
+            this.txtAktivanMeni = new System.Windows.Forms.TextBox();
+            this.txtIDMenijaMeni = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dgwMeni = new System.Windows.Forms.DataGridView();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.txtDodajRedJelo = new System.Windows.Forms.Button();
+            this.txtObrisiRedJelo = new System.Windows.Forms.Button();
+            this.txtNazivJelaJelo = new System.Windows.Forms.TextBox();
+            this.txtOpisJelaJelo = new System.Windows.Forms.TextBox();
+            this.txtIDJelaJelo = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.dgwJelo = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.btnDodajRedSastojak = new System.Windows.Forms.Button();
@@ -55,6 +76,8 @@ namespace Klijent
             this.dgwSastojak = new System.Windows.Forms.DataGridView();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.txtCenaNaMeniju = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
             this.cbIDJelaNaMeniju = new System.Windows.Forms.ComboBox();
             this.cbIDMenijaNaMeniju = new System.Windows.Forms.ComboBox();
             this.btnDodajRedNaMeniju = new System.Windows.Forms.Button();
@@ -93,29 +116,13 @@ namespace Klijent
             this.tabovi = new System.Windows.Forms.TabControl();
             this.dgwMeni1 = new System.Windows.Forms.DataGridView();
             this.lblIdMenija = new System.Windows.Forms.Label();
-            this.dgwMeni = new System.Windows.Forms.DataGridView();
-            this.dgwJelo = new System.Windows.Forms.DataGridView();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtIDJelaJelo = new System.Windows.Forms.TextBox();
-            this.txtOpisJelaJelo = new System.Windows.Forms.TextBox();
-            this.txtNazivJelaJelo = new System.Windows.Forms.TextBox();
-            this.txtObrisiRedJelo = new System.Windows.Forms.Button();
-            this.txtDodajRedJelo = new System.Windows.Forms.Button();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.meniTab = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtIDMenijaMeni = new System.Windows.Forms.TextBox();
-            this.txtAktivanMeni = new System.Windows.Forms.TextBox();
-            this.txtNazivMenijaMeni = new System.Windows.Forms.TextBox();
-            this.btnObrisiRedMeni = new System.Windows.Forms.Button();
-            this.btnDodajRedMeni = new System.Windows.Forms.Button();
-            this.label21 = new System.Windows.Forms.Label();
-            this.txtCenaNaMeniju = new System.Windows.Forms.TextBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.txtVrednostParametra = new System.Windows.Forms.TextBox();
+            this.btnIzmeniRedMeni = new System.Windows.Forms.Button();
+            this.btnIzmeniRedJelo = new System.Windows.Forms.Button();
+            this.btnIzmeniRedSastojak = new System.Windows.Forms.Button();
+            this.btnIzmeniRedNaMeniju = new System.Windows.Forms.Button();
+            this.btnIzmeniRedSeSastoji = new System.Windows.Forms.Button();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).BeginInit();
             this.splitContainer6.Panel1.SuspendLayout();
@@ -126,7 +133,18 @@ namespace Klijent
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage1.SuspendLayout();
             this.tabContTabele.SuspendLayout();
+            this.meniTab.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgwMeni)).BeginInit();
             this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgwJelo)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
@@ -154,17 +172,6 @@ namespace Klijent
             this.tabPage11.SuspendLayout();
             this.tabovi.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgwMeni1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgwMeni)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgwJelo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
-            this.meniTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabPage2
@@ -174,7 +181,7 @@ namespace Klijent
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.tabPage2.Size = new System.Drawing.Size(865, 405);
+            this.tabPage2.Size = new System.Drawing.Size(850, 411);
             this.tabPage2.TabIndex = 2;
             this.tabPage2.Text = "Pretraga po parametrima";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -188,6 +195,8 @@ namespace Klijent
             // 
             // splitContainer6.Panel1
             // 
+            this.splitContainer6.Panel1.Controls.Add(this.txtVrednostParametra);
+            this.splitContainer6.Panel1.Controls.Add(this.label22);
             this.splitContainer6.Panel1.Controls.Add(this.cbIzaberiteParametar);
             this.splitContainer6.Panel1.Controls.Add(this.label16);
             this.splitContainer6.Panel1.Controls.Add(this.cbIzaberiteTabelu);
@@ -198,15 +207,15 @@ namespace Klijent
             // 
             this.splitContainer6.Panel2.Controls.Add(this.dgwPretragaPoParametrima);
             this.splitContainer6.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.splitContainer6.Size = new System.Drawing.Size(859, 399);
-            this.splitContainer6.SplitterDistance = 92;
+            this.splitContainer6.Size = new System.Drawing.Size(844, 405);
+            this.splitContainer6.SplitterDistance = 93;
             this.splitContainer6.TabIndex = 0;
             // 
             // cbIzaberiteParametar
             // 
             this.cbIzaberiteParametar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.cbIzaberiteParametar.FormattingEnabled = true;
-            this.cbIzaberiteParametar.Location = new System.Drawing.Point(404, 35);
+            this.cbIzaberiteParametar.Location = new System.Drawing.Point(397, 36);
             this.cbIzaberiteParametar.Name = "cbIzaberiteParametar";
             this.cbIzaberiteParametar.Size = new System.Drawing.Size(121, 21);
             this.cbIzaberiteParametar.TabIndex = 3;
@@ -215,7 +224,7 @@ namespace Klijent
             // 
             this.label16.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(296, 40);
+            this.label16.Location = new System.Drawing.Point(289, 41);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(97, 13);
             this.label16.TabIndex = 2;
@@ -225,7 +234,7 @@ namespace Klijent
             // 
             this.cbIzaberiteTabelu.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.cbIzaberiteTabelu.FormattingEnabled = true;
-            this.cbIzaberiteTabelu.Location = new System.Drawing.Point(127, 35);
+            this.cbIzaberiteTabelu.Location = new System.Drawing.Point(120, 36);
             this.cbIzaberiteTabelu.Name = "cbIzaberiteTabelu";
             this.cbIzaberiteTabelu.Size = new System.Drawing.Size(121, 21);
             this.cbIzaberiteTabelu.TabIndex = 1;
@@ -234,7 +243,7 @@ namespace Klijent
             // 
             this.label15.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(33, 38);
+            this.label15.Location = new System.Drawing.Point(26, 39);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(79, 13);
             this.label15.TabIndex = 0;
@@ -242,11 +251,13 @@ namespace Klijent
             // 
             // dgwPretragaPoParametrima
             // 
+            this.dgwPretragaPoParametrima.AllowUserToAddRows = false;
+            this.dgwPretragaPoParametrima.AllowUserToDeleteRows = false;
             this.dgwPretragaPoParametrima.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgwPretragaPoParametrima.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgwPretragaPoParametrima.Location = new System.Drawing.Point(0, 0);
             this.dgwPretragaPoParametrima.Name = "dgwPretragaPoParametrima";
-            this.dgwPretragaPoParametrima.Size = new System.Drawing.Size(859, 303);
+            this.dgwPretragaPoParametrima.Size = new System.Drawing.Size(844, 308);
             this.dgwPretragaPoParametrima.TabIndex = 0;
             // 
             // oAplikaciji
@@ -256,16 +267,18 @@ namespace Klijent
             this.oAplikaciji.Location = new System.Drawing.Point(4, 22);
             this.oAplikaciji.Name = "oAplikaciji";
             this.oAplikaciji.Padding = new System.Windows.Forms.Padding(3);
-            this.oAplikaciji.Size = new System.Drawing.Size(840, 410);
+            this.oAplikaciji.Size = new System.Drawing.Size(850, 411);
             this.oAplikaciji.TabIndex = 1;
             this.oAplikaciji.Text = "O Aplikaciji";
             this.oAplikaciji.UseVisualStyleBackColor = true;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(507, 68);
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Location = new System.Drawing.Point(577, 57);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(246, 264);
+            this.pictureBox1.Size = new System.Drawing.Size(246, 306);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
@@ -284,7 +297,7 @@ namespace Klijent
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(647, 402);
+            this.tabPage1.Size = new System.Drawing.Size(850, 411);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Prikaz i izmena podataka";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -301,8 +314,134 @@ namespace Klijent
             this.tabContTabele.Location = new System.Drawing.Point(3, 3);
             this.tabContTabele.Name = "tabContTabele";
             this.tabContTabele.SelectedIndex = 0;
-            this.tabContTabele.Size = new System.Drawing.Size(641, 396);
+            this.tabContTabele.Size = new System.Drawing.Size(844, 405);
             this.tabContTabele.TabIndex = 0;
+            // 
+            // meniTab
+            // 
+            this.meniTab.Controls.Add(this.splitContainer1);
+            this.meniTab.Location = new System.Drawing.Point(4, 22);
+            this.meniTab.Name = "meniTab";
+            this.meniTab.Padding = new System.Windows.Forms.Padding(3);
+            this.meniTab.Size = new System.Drawing.Size(836, 379);
+            this.meniTab.TabIndex = 0;
+            this.meniTab.Text = "Meni";
+            this.meniTab.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.btnIzmeniRedMeni);
+            this.splitContainer1.Panel1.Controls.Add(this.btnDodajRedMeni);
+            this.splitContainer1.Panel1.Controls.Add(this.btnObrisiRedMeni);
+            this.splitContainer1.Panel1.Controls.Add(this.txtNazivMenijaMeni);
+            this.splitContainer1.Panel1.Controls.Add(this.txtAktivanMeni);
+            this.splitContainer1.Panel1.Controls.Add(this.txtIDMenijaMeni);
+            this.splitContainer1.Panel1.Controls.Add(this.label4);
+            this.splitContainer1.Panel1.Controls.Add(this.label3);
+            this.splitContainer1.Panel1.Controls.Add(this.label2);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.dgwMeni);
+            this.splitContainer1.Size = new System.Drawing.Size(830, 373);
+            this.splitContainer1.SplitterDistance = 364;
+            this.splitContainer1.TabIndex = 2;
+            // 
+            // btnDodajRedMeni
+            // 
+            this.btnDodajRedMeni.Location = new System.Drawing.Point(6, 254);
+            this.btnDodajRedMeni.Name = "btnDodajRedMeni";
+            this.btnDodajRedMeni.Size = new System.Drawing.Size(75, 23);
+            this.btnDodajRedMeni.TabIndex = 7;
+            this.btnDodajRedMeni.Text = "Dodaj red";
+            this.btnDodajRedMeni.UseVisualStyleBackColor = true;
+            // 
+            // btnObrisiRedMeni
+            // 
+            this.btnObrisiRedMeni.Location = new System.Drawing.Point(6, 191);
+            this.btnObrisiRedMeni.Name = "btnObrisiRedMeni";
+            this.btnObrisiRedMeni.Size = new System.Drawing.Size(75, 23);
+            this.btnObrisiRedMeni.TabIndex = 6;
+            this.btnObrisiRedMeni.Text = "Obrisi red";
+            this.btnObrisiRedMeni.UseVisualStyleBackColor = true;
+            // 
+            // txtNazivMenijaMeni
+            // 
+            this.txtNazivMenijaMeni.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNazivMenijaMeni.Location = new System.Drawing.Point(75, 85);
+            this.txtNazivMenijaMeni.Name = "txtNazivMenijaMeni";
+            this.txtNazivMenijaMeni.Size = new System.Drawing.Size(193, 20);
+            this.txtNazivMenijaMeni.TabIndex = 5;
+            // 
+            // txtAktivanMeni
+            // 
+            this.txtAktivanMeni.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtAktivanMeni.Location = new System.Drawing.Point(75, 134);
+            this.txtAktivanMeni.Name = "txtAktivanMeni";
+            this.txtAktivanMeni.Size = new System.Drawing.Size(193, 20);
+            this.txtAktivanMeni.TabIndex = 4;
+            // 
+            // txtIDMenijaMeni
+            // 
+            this.txtIDMenijaMeni.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtIDMenijaMeni.Location = new System.Drawing.Point(74, 42);
+            this.txtIDMenijaMeni.Name = "txtIDMenijaMeni";
+            this.txtIDMenijaMeni.Size = new System.Drawing.Size(194, 20);
+            this.txtIDMenijaMeni.TabIndex = 3;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 137);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(43, 13);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Aktivan";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 88);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(67, 13);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Naziv menija";
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 45);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(51, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "ID menija";
+            // 
+            // dgwMeni
+            // 
+            this.dgwMeni.AllowUserToAddRows = false;
+            this.dgwMeni.AllowUserToDeleteRows = false;
+            this.dgwMeni.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgwMeni.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgwMeni.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgwMeni.Location = new System.Drawing.Point(0, 0);
+            this.dgwMeni.Name = "dgwMeni";
+            this.dgwMeni.Size = new System.Drawing.Size(462, 373);
+            this.dgwMeni.TabIndex = 0;
             // 
             // tabPage4
             // 
@@ -310,10 +449,121 @@ namespace Klijent
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(633, 370);
+            this.tabPage4.Size = new System.Drawing.Size(836, 379);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "Jelo";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.btnIzmeniRedJelo);
+            this.splitContainer2.Panel1.Controls.Add(this.txtDodajRedJelo);
+            this.splitContainer2.Panel1.Controls.Add(this.txtObrisiRedJelo);
+            this.splitContainer2.Panel1.Controls.Add(this.txtNazivJelaJelo);
+            this.splitContainer2.Panel1.Controls.Add(this.txtOpisJelaJelo);
+            this.splitContainer2.Panel1.Controls.Add(this.txtIDJelaJelo);
+            this.splitContainer2.Panel1.Controls.Add(this.label5);
+            this.splitContainer2.Panel1.Controls.Add(this.label6);
+            this.splitContainer2.Panel1.Controls.Add(this.label7);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.dgwJelo);
+            this.splitContainer2.Size = new System.Drawing.Size(830, 373);
+            this.splitContainer2.SplitterDistance = 364;
+            this.splitContainer2.TabIndex = 2;
+            // 
+            // txtDodajRedJelo
+            // 
+            this.txtDodajRedJelo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtDodajRedJelo.Location = new System.Drawing.Point(0, 275);
+            this.txtDodajRedJelo.Name = "txtDodajRedJelo";
+            this.txtDodajRedJelo.Size = new System.Drawing.Size(75, 27);
+            this.txtDodajRedJelo.TabIndex = 15;
+            this.txtDodajRedJelo.Text = "Dodaj red";
+            this.txtDodajRedJelo.UseVisualStyleBackColor = true;
+            // 
+            // txtObrisiRedJelo
+            // 
+            this.txtObrisiRedJelo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtObrisiRedJelo.Location = new System.Drawing.Point(0, 242);
+            this.txtObrisiRedJelo.Name = "txtObrisiRedJelo";
+            this.txtObrisiRedJelo.Size = new System.Drawing.Size(75, 27);
+            this.txtObrisiRedJelo.TabIndex = 14;
+            this.txtObrisiRedJelo.Text = "Obrisi red";
+            this.txtObrisiRedJelo.UseVisualStyleBackColor = true;
+            // 
+            // txtNazivJelaJelo
+            // 
+            this.txtNazivJelaJelo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNazivJelaJelo.Location = new System.Drawing.Point(110, 95);
+            this.txtNazivJelaJelo.Name = "txtNazivJelaJelo";
+            this.txtNazivJelaJelo.Size = new System.Drawing.Size(168, 20);
+            this.txtNazivJelaJelo.TabIndex = 13;
+            // 
+            // txtOpisJelaJelo
+            // 
+            this.txtOpisJelaJelo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtOpisJelaJelo.Location = new System.Drawing.Point(110, 144);
+            this.txtOpisJelaJelo.Multiline = true;
+            this.txtOpisJelaJelo.Name = "txtOpisJelaJelo";
+            this.txtOpisJelaJelo.Size = new System.Drawing.Size(168, 80);
+            this.txtOpisJelaJelo.TabIndex = 12;
+            // 
+            // txtIDJelaJelo
+            // 
+            this.txtIDJelaJelo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtIDJelaJelo.Location = new System.Drawing.Point(110, 52);
+            this.txtIDJelaJelo.Name = "txtIDJelaJelo";
+            this.txtIDJelaJelo.Size = new System.Drawing.Size(168, 20);
+            this.txtIDJelaJelo.TabIndex = 11;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 147);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(47, 13);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Opis jela";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 98);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(53, 13);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "Naziv jela";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 55);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(37, 13);
+            this.label7.TabIndex = 8;
+            this.label7.Text = "ID jela";
+            // 
+            // dgwJelo
+            // 
+            this.dgwJelo.AllowUserToAddRows = false;
+            this.dgwJelo.AllowUserToDeleteRows = false;
+            this.dgwJelo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgwJelo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgwJelo.Location = new System.Drawing.Point(0, 0);
+            this.dgwJelo.Name = "dgwJelo";
+            this.dgwJelo.Size = new System.Drawing.Size(462, 373);
+            this.dgwJelo.TabIndex = 1;
             // 
             // tabPage3
             // 
@@ -321,7 +571,7 @@ namespace Klijent
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(633, 370);
+            this.tabPage3.Size = new System.Drawing.Size(836, 379);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Sastojak";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -334,6 +584,7 @@ namespace Klijent
             // 
             // splitContainer3.Panel1
             // 
+            this.splitContainer3.Panel1.Controls.Add(this.btnIzmeniRedSastojak);
             this.splitContainer3.Panel1.Controls.Add(this.btnDodajRedSastojak);
             this.splitContainer3.Panel1.Controls.Add(this.btnObrisiRedSastojak);
             this.splitContainer3.Panel1.Controls.Add(this.txtNazivSastojkaSastojak);
@@ -346,14 +597,14 @@ namespace Klijent
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.dgwSastojak);
-            this.splitContainer3.Size = new System.Drawing.Size(627, 364);
-            this.splitContainer3.SplitterDistance = 272;
+            this.splitContainer3.Size = new System.Drawing.Size(830, 373);
+            this.splitContainer3.SplitterDistance = 360;
             this.splitContainer3.TabIndex = 1;
             // 
             // btnDodajRedSastojak
             // 
             this.btnDodajRedSastojak.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDodajRedSastojak.Location = new System.Drawing.Point(3, 312);
+            this.btnDodajRedSastojak.Location = new System.Drawing.Point(0, 262);
             this.btnDodajRedSastojak.Name = "btnDodajRedSastojak";
             this.btnDodajRedSastojak.Size = new System.Drawing.Size(75, 23);
             this.btnDodajRedSastojak.TabIndex = 23;
@@ -364,7 +615,7 @@ namespace Klijent
             // 
             this.btnObrisiRedSastojak.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnObrisiRedSastojak.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnObrisiRedSastojak.Location = new System.Drawing.Point(3, 249);
+            this.btnObrisiRedSastojak.Location = new System.Drawing.Point(0, 233);
             this.btnObrisiRedSastojak.Name = "btnObrisiRedSastojak";
             this.btnObrisiRedSastojak.Size = new System.Drawing.Size(75, 23);
             this.btnObrisiRedSastojak.TabIndex = 22;
@@ -377,7 +628,7 @@ namespace Klijent
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNazivSastojkaSastojak.Location = new System.Drawing.Point(110, 86);
             this.txtNazivSastojkaSastojak.Name = "txtNazivSastojkaSastojak";
-            this.txtNazivSastojkaSastojak.Size = new System.Drawing.Size(57, 20);
+            this.txtNazivSastojkaSastojak.Size = new System.Drawing.Size(145, 20);
             this.txtNazivSastojkaSastojak.TabIndex = 21;
             // 
             // txtOpisSastojkaSastojak
@@ -387,7 +638,7 @@ namespace Klijent
             this.txtOpisSastojkaSastojak.Location = new System.Drawing.Point(110, 135);
             this.txtOpisSastojkaSastojak.Multiline = true;
             this.txtOpisSastojkaSastojak.Name = "txtOpisSastojkaSastojak";
-            this.txtOpisSastojkaSastojak.Size = new System.Drawing.Size(57, 80);
+            this.txtOpisSastojkaSastojak.Size = new System.Drawing.Size(145, 80);
             this.txtOpisSastojkaSastojak.TabIndex = 20;
             // 
             // txtIDSastojkaSastojak
@@ -396,14 +647,14 @@ namespace Klijent
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtIDSastojkaSastojak.Location = new System.Drawing.Point(110, 43);
             this.txtIDSastojkaSastojak.Name = "txtIDSastojkaSastojak";
-            this.txtIDSastojkaSastojak.Size = new System.Drawing.Size(57, 20);
+            this.txtIDSastojkaSastojak.Size = new System.Drawing.Size(145, 20);
             this.txtIDSastojkaSastojak.TabIndex = 19;
             // 
             // label8
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 146);
+            this.label8.Location = new System.Drawing.Point(3, 155);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(70, 13);
             this.label8.TabIndex = 18;
@@ -413,7 +664,7 @@ namespace Klijent
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 97);
+            this.label9.Location = new System.Drawing.Point(3, 106);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(76, 13);
             this.label9.TabIndex = 17;
@@ -423,7 +674,7 @@ namespace Klijent
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(3, 54);
+            this.label10.Location = new System.Drawing.Point(3, 63);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(60, 13);
             this.label10.TabIndex = 16;
@@ -431,11 +682,13 @@ namespace Klijent
             // 
             // dgwSastojak
             // 
+            this.dgwSastojak.AllowUserToAddRows = false;
+            this.dgwSastojak.AllowUserToDeleteRows = false;
             this.dgwSastojak.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgwSastojak.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgwSastojak.Location = new System.Drawing.Point(0, 0);
             this.dgwSastojak.Name = "dgwSastojak";
-            this.dgwSastojak.Size = new System.Drawing.Size(351, 364);
+            this.dgwSastojak.Size = new System.Drawing.Size(466, 373);
             this.dgwSastojak.TabIndex = 1;
             // 
             // tabPage5
@@ -444,7 +697,7 @@ namespace Klijent
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(633, 370);
+            this.tabPage5.Size = new System.Drawing.Size(836, 379);
             this.tabPage5.TabIndex = 3;
             this.tabPage5.Text = "Na meniju";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -457,6 +710,7 @@ namespace Klijent
             // 
             // splitContainer4.Panel1
             // 
+            this.splitContainer4.Panel1.Controls.Add(this.btnIzmeniRedNaMeniju);
             this.splitContainer4.Panel1.Controls.Add(this.txtCenaNaMeniju);
             this.splitContainer4.Panel1.Controls.Add(this.label21);
             this.splitContainer4.Panel1.Controls.Add(this.cbIDJelaNaMeniju);
@@ -469,9 +723,29 @@ namespace Klijent
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.dgwNaMeniju);
-            this.splitContainer4.Size = new System.Drawing.Size(627, 364);
-            this.splitContainer4.SplitterDistance = 276;
+            this.splitContainer4.Size = new System.Drawing.Size(830, 373);
+            this.splitContainer4.SplitterDistance = 365;
             this.splitContainer4.TabIndex = 2;
+            // 
+            // txtCenaNaMeniju
+            // 
+            this.txtCenaNaMeniju.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCenaNaMeniju.Location = new System.Drawing.Point(80, 127);
+            this.txtCenaNaMeniju.Name = "txtCenaNaMeniju";
+            this.txtCenaNaMeniju.Size = new System.Drawing.Size(177, 20);
+            this.txtCenaNaMeniju.TabIndex = 27;
+            // 
+            // label21
+            // 
+            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(3, 130);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(32, 13);
+            this.label21.TabIndex = 26;
+            this.label21.Text = "Cena";
             // 
             // cbIDJelaNaMeniju
             // 
@@ -480,7 +754,7 @@ namespace Klijent
             this.cbIDJelaNaMeniju.FormattingEnabled = true;
             this.cbIDJelaNaMeniju.Location = new System.Drawing.Point(80, 83);
             this.cbIDJelaNaMeniju.Name = "cbIDJelaNaMeniju";
-            this.cbIDJelaNaMeniju.Size = new System.Drawing.Size(88, 21);
+            this.cbIDJelaNaMeniju.Size = new System.Drawing.Size(177, 21);
             this.cbIDJelaNaMeniju.TabIndex = 25;
             // 
             // cbIDMenijaNaMeniju
@@ -490,13 +764,13 @@ namespace Klijent
             this.cbIDMenijaNaMeniju.FormattingEnabled = true;
             this.cbIDMenijaNaMeniju.Location = new System.Drawing.Point(80, 45);
             this.cbIDMenijaNaMeniju.Name = "cbIDMenijaNaMeniju";
-            this.cbIDMenijaNaMeniju.Size = new System.Drawing.Size(88, 21);
+            this.cbIDMenijaNaMeniju.Size = new System.Drawing.Size(177, 21);
             this.cbIDMenijaNaMeniju.TabIndex = 24;
             // 
             // btnDodajRedNaMeniju
             // 
             this.btnDodajRedNaMeniju.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDodajRedNaMeniju.Location = new System.Drawing.Point(3, 224);
+            this.btnDodajRedNaMeniju.Location = new System.Drawing.Point(3, 233);
             this.btnDodajRedNaMeniju.Name = "btnDodajRedNaMeniju";
             this.btnDodajRedNaMeniju.Size = new System.Drawing.Size(75, 23);
             this.btnDodajRedNaMeniju.TabIndex = 23;
@@ -506,7 +780,7 @@ namespace Klijent
             // btnObrisiRedNaMeniju
             // 
             this.btnObrisiRedNaMeniju.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnObrisiRedNaMeniju.Location = new System.Drawing.Point(3, 168);
+            this.btnObrisiRedNaMeniju.Location = new System.Drawing.Point(3, 204);
             this.btnObrisiRedNaMeniju.Name = "btnObrisiRedNaMeniju";
             this.btnObrisiRedNaMeniju.Size = new System.Drawing.Size(75, 23);
             this.btnObrisiRedNaMeniju.TabIndex = 22;
@@ -537,11 +811,13 @@ namespace Klijent
             // 
             // dgwNaMeniju
             // 
+            this.dgwNaMeniju.AllowUserToAddRows = false;
+            this.dgwNaMeniju.AllowUserToDeleteRows = false;
             this.dgwNaMeniju.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgwNaMeniju.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgwNaMeniju.Location = new System.Drawing.Point(0, 0);
             this.dgwNaMeniju.Name = "dgwNaMeniju";
-            this.dgwNaMeniju.Size = new System.Drawing.Size(347, 364);
+            this.dgwNaMeniju.Size = new System.Drawing.Size(461, 373);
             this.dgwNaMeniju.TabIndex = 1;
             // 
             // tabPage6
@@ -550,7 +826,7 @@ namespace Klijent
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(633, 370);
+            this.tabPage6.Size = new System.Drawing.Size(836, 379);
             this.tabPage6.TabIndex = 4;
             this.tabPage6.Text = "Se sastoji";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -563,6 +839,7 @@ namespace Klijent
             // 
             // splitContainer5.Panel1
             // 
+            this.splitContainer5.Panel1.Controls.Add(this.btnIzmeniRedSeSastoji);
             this.splitContainer5.Panel1.Controls.Add(this.cbIDSastojkaSeSastoji);
             this.splitContainer5.Panel1.Controls.Add(this.cbIDJelaSeSastoji);
             this.splitContainer5.Panel1.Controls.Add(this.btnDodajRedSeSastoji);
@@ -573,8 +850,8 @@ namespace Klijent
             // splitContainer5.Panel2
             // 
             this.splitContainer5.Panel2.Controls.Add(this.dgwSeSastoji);
-            this.splitContainer5.Size = new System.Drawing.Size(627, 364);
-            this.splitContainer5.SplitterDistance = 276;
+            this.splitContainer5.Size = new System.Drawing.Size(830, 373);
+            this.splitContainer5.SplitterDistance = 365;
             this.splitContainer5.TabIndex = 2;
             // 
             // cbIDSastojkaSeSastoji
@@ -596,7 +873,7 @@ namespace Klijent
             // btnDodajRedSeSastoji
             // 
             this.btnDodajRedSeSastoji.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDodajRedSeSastoji.Location = new System.Drawing.Point(3, 219);
+            this.btnDodajRedSeSastoji.Location = new System.Drawing.Point(3, 228);
             this.btnDodajRedSeSastoji.Name = "btnDodajRedSeSastoji";
             this.btnDodajRedSeSastoji.Size = new System.Drawing.Size(75, 23);
             this.btnDodajRedSeSastoji.TabIndex = 29;
@@ -607,9 +884,9 @@ namespace Klijent
             // 
             this.btnObrisiRedSeSastoji.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnObrisiRedSeSastoji.Location = new System.Drawing.Point(3, 136);
+            this.btnObrisiRedSeSastoji.Location = new System.Drawing.Point(3, 197);
             this.btnObrisiRedSeSastoji.Name = "btnObrisiRedSeSastoji";
-            this.btnObrisiRedSeSastoji.Size = new System.Drawing.Size(75, 43);
+            this.btnObrisiRedSeSastoji.Size = new System.Drawing.Size(75, 25);
             this.btnObrisiRedSeSastoji.TabIndex = 28;
             this.btnObrisiRedSeSastoji.Text = "Obrisi red";
             this.btnObrisiRedSeSastoji.UseVisualStyleBackColor = true;
@@ -638,11 +915,13 @@ namespace Klijent
             // 
             // dgwSeSastoji
             // 
+            this.dgwSeSastoji.AllowUserToAddRows = false;
+            this.dgwSeSastoji.AllowUserToDeleteRows = false;
             this.dgwSeSastoji.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgwSeSastoji.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgwSeSastoji.Location = new System.Drawing.Point(0, 0);
             this.dgwSeSastoji.Name = "dgwSeSastoji";
-            this.dgwSeSastoji.Size = new System.Drawing.Size(347, 364);
+            this.dgwSeSastoji.Size = new System.Drawing.Size(461, 373);
             this.dgwSeSastoji.TabIndex = 1;
             // 
             // tabPage7
@@ -652,18 +931,20 @@ namespace Klijent
             this.tabPage7.Location = new System.Drawing.Point(4, 22);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(633, 370);
+            this.tabPage7.Size = new System.Drawing.Size(836, 379);
             this.tabPage7.TabIndex = 5;
             this.tabPage7.Text = "Specijalne mogucnosti";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
             // dgwSpecijalnaPretraga
             // 
+            this.dgwSpecijalnaPretraga.AllowUserToAddRows = false;
+            this.dgwSpecijalnaPretraga.AllowUserToDeleteRows = false;
             this.dgwSpecijalnaPretraga.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgwSpecijalnaPretraga.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgwSpecijalnaPretraga.Location = new System.Drawing.Point(3, 138);
+            this.dgwSpecijalnaPretraga.Location = new System.Drawing.Point(3, 147);
             this.dgwSpecijalnaPretraga.Name = "dgwSpecijalnaPretraga";
-            this.dgwSpecijalnaPretraga.Size = new System.Drawing.Size(627, 229);
+            this.dgwSpecijalnaPretraga.Size = new System.Drawing.Size(830, 229);
             this.dgwSpecijalnaPretraga.TabIndex = 1;
             // 
             // tabControl1
@@ -676,7 +957,7 @@ namespace Klijent
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(627, 132);
+            this.tabControl1.Size = new System.Drawing.Size(830, 132);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage8
@@ -687,7 +968,7 @@ namespace Klijent
             this.tabPage8.Location = new System.Drawing.Point(4, 22);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(619, 106);
+            this.tabPage8.Size = new System.Drawing.Size(822, 106);
             this.tabPage8.TabIndex = 0;
             this.tabPage8.Text = "Jela na menijima koji su aktivni + cena";
             this.tabPage8.UseVisualStyleBackColor = true;
@@ -695,7 +976,7 @@ namespace Klijent
             // txtCenaSpecPretraga
             // 
             this.txtCenaSpecPretraga.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCenaSpecPretraga.Location = new System.Drawing.Point(87, 39);
+            this.txtCenaSpecPretraga.Location = new System.Drawing.Point(290, 39);
             this.txtCenaSpecPretraga.Name = "txtCenaSpecPretraga";
             this.txtCenaSpecPretraga.Size = new System.Drawing.Size(112, 20);
             this.txtCenaSpecPretraga.TabIndex = 2;
@@ -704,7 +985,7 @@ namespace Klijent
             // 
             this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(38, 42);
+            this.label17.Location = new System.Drawing.Point(241, 42);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(32, 13);
             this.label17.TabIndex = 1;
@@ -713,7 +994,7 @@ namespace Klijent
             // btnPretraziJelaMeniCena
             // 
             this.btnPretraziJelaMeniCena.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPretraziJelaMeniCena.Location = new System.Drawing.Point(227, 37);
+            this.btnPretraziJelaMeniCena.Location = new System.Drawing.Point(430, 37);
             this.btnPretraziJelaMeniCena.Name = "btnPretraziJelaMeniCena";
             this.btnPretraziJelaMeniCena.Size = new System.Drawing.Size(96, 23);
             this.btnPretraziJelaMeniCena.TabIndex = 0;
@@ -728,7 +1009,7 @@ namespace Klijent
             this.tabPage9.Location = new System.Drawing.Point(4, 22);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(619, 106);
+            this.tabPage9.Size = new System.Drawing.Size(822, 106);
             this.tabPage9.TabIndex = 1;
             this.tabPage9.Text = "Jela prema broju sastojaka";
             this.tabPage9.UseVisualStyleBackColor = true;
@@ -736,7 +1017,7 @@ namespace Klijent
             // txtBrojSastojakaJela
             // 
             this.txtBrojSastojakaJela.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBrojSastojakaJela.Location = new System.Drawing.Point(101, 39);
+            this.txtBrojSastojakaJela.Location = new System.Drawing.Point(304, 39);
             this.txtBrojSastojakaJela.Name = "txtBrojSastojakaJela";
             this.txtBrojSastojakaJela.Size = new System.Drawing.Size(100, 20);
             this.txtBrojSastojakaJela.TabIndex = 5;
@@ -745,7 +1026,7 @@ namespace Klijent
             // 
             this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(11, 42);
+            this.label18.Location = new System.Drawing.Point(214, 42);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(73, 13);
             this.label18.TabIndex = 4;
@@ -754,7 +1035,7 @@ namespace Klijent
             // btnPretraziJelaBrSastojci
             // 
             this.btnPretraziJelaBrSastojci.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPretraziJelaBrSastojci.Location = new System.Drawing.Point(250, 37);
+            this.btnPretraziJelaBrSastojci.Location = new System.Drawing.Point(453, 37);
             this.btnPretraziJelaBrSastojci.Name = "btnPretraziJelaBrSastojci";
             this.btnPretraziJelaBrSastojci.Size = new System.Drawing.Size(75, 23);
             this.btnPretraziJelaBrSastojci.TabIndex = 3;
@@ -769,7 +1050,7 @@ namespace Klijent
             this.tabPage10.Location = new System.Drawing.Point(4, 22);
             this.tabPage10.Name = "tabPage10";
             this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(619, 106);
+            this.tabPage10.Size = new System.Drawing.Size(822, 106);
             this.tabPage10.TabIndex = 2;
             this.tabPage10.Text = "Jela prema meniju";
             this.tabPage10.UseVisualStyleBackColor = true;
@@ -778,7 +1059,7 @@ namespace Klijent
             // 
             this.cbMeniJelaPrema.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cbMeniJelaPrema.FormattingEnabled = true;
-            this.cbMeniJelaPrema.Location = new System.Drawing.Point(76, 42);
+            this.cbMeniJelaPrema.Location = new System.Drawing.Point(279, 42);
             this.cbMeniJelaPrema.Name = "cbMeniJelaPrema";
             this.cbMeniJelaPrema.Size = new System.Drawing.Size(121, 21);
             this.cbMeniJelaPrema.TabIndex = 5;
@@ -787,7 +1068,7 @@ namespace Klijent
             // 
             this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(28, 45);
+            this.label19.Location = new System.Drawing.Point(231, 45);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(30, 13);
             this.label19.TabIndex = 4;
@@ -796,7 +1077,7 @@ namespace Klijent
             // btnPretraziJelaMeni
             // 
             this.btnPretraziJelaMeni.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPretraziJelaMeni.Location = new System.Drawing.Point(235, 40);
+            this.btnPretraziJelaMeni.Location = new System.Drawing.Point(438, 40);
             this.btnPretraziJelaMeni.Name = "btnPretraziJelaMeni";
             this.btnPretraziJelaMeni.Size = new System.Drawing.Size(75, 23);
             this.btnPretraziJelaMeni.TabIndex = 3;
@@ -811,7 +1092,7 @@ namespace Klijent
             this.tabPage11.Location = new System.Drawing.Point(4, 22);
             this.tabPage11.Name = "tabPage11";
             this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage11.Size = new System.Drawing.Size(619, 106);
+            this.tabPage11.Size = new System.Drawing.Size(822, 106);
             this.tabPage11.TabIndex = 3;
             this.tabPage11.Text = "Jela prema sastojku";
             this.tabPage11.UseVisualStyleBackColor = true;
@@ -820,7 +1101,7 @@ namespace Klijent
             // 
             this.cbSastojakJelaPrema.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cbSastojakJelaPrema.FormattingEnabled = true;
-            this.cbSastojakJelaPrema.Location = new System.Drawing.Point(96, 35);
+            this.cbSastojakJelaPrema.Location = new System.Drawing.Point(299, 35);
             this.cbSastojakJelaPrema.Name = "cbSastojakJelaPrema";
             this.cbSastojakJelaPrema.Size = new System.Drawing.Size(121, 21);
             this.cbSastojakJelaPrema.TabIndex = 8;
@@ -829,7 +1110,7 @@ namespace Klijent
             // 
             this.label20.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(42, 38);
+            this.label20.Location = new System.Drawing.Point(245, 38);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(48, 13);
             this.label20.TabIndex = 7;
@@ -838,7 +1119,7 @@ namespace Klijent
             // btnPretraziJelaSastojak
             // 
             this.btnPretraziJelaSastojak.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPretraziJelaSastojak.Location = new System.Drawing.Point(249, 33);
+            this.btnPretraziJelaSastojak.Location = new System.Drawing.Point(452, 33);
             this.btnPretraziJelaSastojak.Name = "btnPretraziJelaSastojak";
             this.btnPretraziJelaSastojak.Size = new System.Drawing.Size(75, 23);
             this.btnPretraziJelaSastojak.TabIndex = 6;
@@ -854,7 +1135,7 @@ namespace Klijent
             this.tabovi.Location = new System.Drawing.Point(0, 0);
             this.tabovi.Name = "tabovi";
             this.tabovi.SelectedIndex = 0;
-            this.tabovi.Size = new System.Drawing.Size(655, 428);
+            this.tabovi.Size = new System.Drawing.Size(858, 437);
             this.tabovi.TabIndex = 0;
             // 
             // dgwMeni1
@@ -874,264 +1155,77 @@ namespace Klijent
             this.lblIdMenija.Size = new System.Drawing.Size(51, 13);
             this.lblIdMenija.TabIndex = 0;
             // 
-            // dgwMeni
+            // label22
             // 
-            this.dgwMeni.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgwMeni.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgwMeni.Location = new System.Drawing.Point(0, 0);
-            this.dgwMeni.Name = "dgwMeni";
-            this.dgwMeni.Size = new System.Drawing.Size(470, 367);
-            this.dgwMeni.TabIndex = 0;
+            this.label22.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(540, 41);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(105, 13);
+            this.label22.TabIndex = 4;
+            this.label22.Text = "Vrednost parametra: \r\n";
             // 
-            // dgwJelo
+            // txtVrednostParametra
             // 
-            this.dgwJelo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgwJelo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgwJelo.Location = new System.Drawing.Point(0, 0);
-            this.dgwJelo.Name = "dgwJelo";
-            this.dgwJelo.Size = new System.Drawing.Size(348, 364);
-            this.dgwJelo.TabIndex = 1;
+            this.txtVrednostParametra.Location = new System.Drawing.Point(651, 36);
+            this.txtVrednostParametra.Name = "txtVrednostParametra";
+            this.txtVrednostParametra.Size = new System.Drawing.Size(110, 20);
+            this.txtVrednostParametra.TabIndex = 5;
             // 
-            // label7
+            // btnIzmeniRedMeni
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 55);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(37, 13);
-            this.label7.TabIndex = 8;
-            this.label7.Text = "ID jela";
+            this.btnIzmeniRedMeni.Location = new System.Drawing.Point(6, 310);
+            this.btnIzmeniRedMeni.Name = "btnIzmeniRedMeni";
+            this.btnIzmeniRedMeni.Size = new System.Drawing.Size(75, 23);
+            this.btnIzmeniRedMeni.TabIndex = 8;
+            this.btnIzmeniRedMeni.Text = "Izmeni red";
+            this.btnIzmeniRedMeni.UseVisualStyleBackColor = true;
             // 
-            // label6
+            // btnIzmeniRedJelo
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 98);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(53, 13);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "Naziv jela";
+            this.btnIzmeniRedJelo.Location = new System.Drawing.Point(0, 308);
+            this.btnIzmeniRedJelo.Name = "btnIzmeniRedJelo";
+            this.btnIzmeniRedJelo.Size = new System.Drawing.Size(75, 30);
+            this.btnIzmeniRedJelo.TabIndex = 16;
+            this.btnIzmeniRedJelo.Text = "Izmeni red";
+            this.btnIzmeniRedJelo.UseVisualStyleBackColor = true;
             // 
-            // label5
+            // btnIzmeniRedSastojak
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 147);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(47, 13);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Opis jela";
+            this.btnIzmeniRedSastojak.Location = new System.Drawing.Point(0, 291);
+            this.btnIzmeniRedSastojak.Name = "btnIzmeniRedSastojak";
+            this.btnIzmeniRedSastojak.Size = new System.Drawing.Size(75, 23);
+            this.btnIzmeniRedSastojak.TabIndex = 24;
+            this.btnIzmeniRedSastojak.Text = "Izmeni red";
+            this.btnIzmeniRedSastojak.UseVisualStyleBackColor = true;
             // 
-            // txtIDJelaJelo
+            // btnIzmeniRedNaMeniju
             // 
-            this.txtIDJelaJelo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtIDJelaJelo.Location = new System.Drawing.Point(110, 52);
-            this.txtIDJelaJelo.Name = "txtIDJelaJelo";
-            this.txtIDJelaJelo.Size = new System.Drawing.Size(79, 20);
-            this.txtIDJelaJelo.TabIndex = 11;
+            this.btnIzmeniRedNaMeniju.Location = new System.Drawing.Point(3, 262);
+            this.btnIzmeniRedNaMeniju.Name = "btnIzmeniRedNaMeniju";
+            this.btnIzmeniRedNaMeniju.Size = new System.Drawing.Size(75, 23);
+            this.btnIzmeniRedNaMeniju.TabIndex = 28;
+            this.btnIzmeniRedNaMeniju.Text = "Izmeni red";
+            this.btnIzmeniRedNaMeniju.UseVisualStyleBackColor = true;
             // 
-            // txtOpisJelaJelo
+            // btnIzmeniRedSeSastoji
             // 
-            this.txtOpisJelaJelo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtOpisJelaJelo.Location = new System.Drawing.Point(110, 144);
-            this.txtOpisJelaJelo.Multiline = true;
-            this.txtOpisJelaJelo.Name = "txtOpisJelaJelo";
-            this.txtOpisJelaJelo.Size = new System.Drawing.Size(79, 80);
-            this.txtOpisJelaJelo.TabIndex = 12;
-            // 
-            // txtNazivJelaJelo
-            // 
-            this.txtNazivJelaJelo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNazivJelaJelo.Location = new System.Drawing.Point(110, 95);
-            this.txtNazivJelaJelo.Name = "txtNazivJelaJelo";
-            this.txtNazivJelaJelo.Size = new System.Drawing.Size(79, 20);
-            this.txtNazivJelaJelo.TabIndex = 13;
-            // 
-            // txtObrisiRedJelo
-            // 
-            this.txtObrisiRedJelo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtObrisiRedJelo.Location = new System.Drawing.Point(3, 262);
-            this.txtObrisiRedJelo.Name = "txtObrisiRedJelo";
-            this.txtObrisiRedJelo.Size = new System.Drawing.Size(75, 27);
-            this.txtObrisiRedJelo.TabIndex = 14;
-            this.txtObrisiRedJelo.Text = "Obrisi red";
-            this.txtObrisiRedJelo.UseVisualStyleBackColor = true;
-            // 
-            // txtDodajRedJelo
-            // 
-            this.txtDodajRedJelo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtDodajRedJelo.Location = new System.Drawing.Point(3, 325);
-            this.txtDodajRedJelo.Name = "txtDodajRedJelo";
-            this.txtDodajRedJelo.Size = new System.Drawing.Size(75, 27);
-            this.txtDodajRedJelo.TabIndex = 15;
-            this.txtDodajRedJelo.Text = "Dodaj red";
-            this.txtDodajRedJelo.UseVisualStyleBackColor = true;
-            // 
-            // splitContainer2
-            // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(3, 3);
-            this.splitContainer2.Name = "splitContainer2";
-            // 
-            // splitContainer2.Panel1
-            // 
-            this.splitContainer2.Panel1.Controls.Add(this.txtDodajRedJelo);
-            this.splitContainer2.Panel1.Controls.Add(this.txtObrisiRedJelo);
-            this.splitContainer2.Panel1.Controls.Add(this.txtNazivJelaJelo);
-            this.splitContainer2.Panel1.Controls.Add(this.txtOpisJelaJelo);
-            this.splitContainer2.Panel1.Controls.Add(this.txtIDJelaJelo);
-            this.splitContainer2.Panel1.Controls.Add(this.label5);
-            this.splitContainer2.Panel1.Controls.Add(this.label6);
-            this.splitContainer2.Panel1.Controls.Add(this.label7);
-            // 
-            // splitContainer2.Panel2
-            // 
-            this.splitContainer2.Panel2.Controls.Add(this.dgwJelo);
-            this.splitContainer2.Size = new System.Drawing.Size(627, 364);
-            this.splitContainer2.SplitterDistance = 275;
-            this.splitContainer2.TabIndex = 2;
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(3, 3);
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.btnDodajRedMeni);
-            this.splitContainer1.Panel1.Controls.Add(this.btnObrisiRedMeni);
-            this.splitContainer1.Panel1.Controls.Add(this.txtNazivMenijaMeni);
-            this.splitContainer1.Panel1.Controls.Add(this.txtAktivanMeni);
-            this.splitContainer1.Panel1.Controls.Add(this.txtIDMenijaMeni);
-            this.splitContainer1.Panel1.Controls.Add(this.label4);
-            this.splitContainer1.Panel1.Controls.Add(this.label3);
-            this.splitContainer1.Panel1.Controls.Add(this.label2);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.dgwMeni);
-            this.splitContainer1.Size = new System.Drawing.Size(845, 367);
-            this.splitContainer1.SplitterDistance = 371;
-            this.splitContainer1.TabIndex = 2;
-            // 
-            // meniTab
-            // 
-            this.meniTab.Controls.Add(this.splitContainer1);
-            this.meniTab.Location = new System.Drawing.Point(4, 22);
-            this.meniTab.Name = "meniTab";
-            this.meniTab.Padding = new System.Windows.Forms.Padding(3);
-            this.meniTab.Size = new System.Drawing.Size(851, 373);
-            this.meniTab.TabIndex = 0;
-            this.meniTab.Text = "Meni";
-            this.meniTab.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 45);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "ID menija";
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 88);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(67, 13);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Naziv menija";
-            // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 137);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(43, 13);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Aktivan";
-            // 
-            // txtIDMenijaMeni
-            // 
-            this.txtIDMenijaMeni.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtIDMenijaMeni.Location = new System.Drawing.Point(74, 42);
-            this.txtIDMenijaMeni.Name = "txtIDMenijaMeni";
-            this.txtIDMenijaMeni.Size = new System.Drawing.Size(201, 20);
-            this.txtIDMenijaMeni.TabIndex = 3;
-            // 
-            // txtAktivanMeni
-            // 
-            this.txtAktivanMeni.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAktivanMeni.Location = new System.Drawing.Point(75, 134);
-            this.txtAktivanMeni.Name = "txtAktivanMeni";
-            this.txtAktivanMeni.Size = new System.Drawing.Size(200, 20);
-            this.txtAktivanMeni.TabIndex = 4;
-            // 
-            // txtNazivMenijaMeni
-            // 
-            this.txtNazivMenijaMeni.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNazivMenijaMeni.Location = new System.Drawing.Point(75, 85);
-            this.txtNazivMenijaMeni.Name = "txtNazivMenijaMeni";
-            this.txtNazivMenijaMeni.Size = new System.Drawing.Size(200, 20);
-            this.txtNazivMenijaMeni.TabIndex = 5;
-            // 
-            // btnObrisiRedMeni
-            // 
-            this.btnObrisiRedMeni.Location = new System.Drawing.Point(6, 191);
-            this.btnObrisiRedMeni.Name = "btnObrisiRedMeni";
-            this.btnObrisiRedMeni.Size = new System.Drawing.Size(75, 23);
-            this.btnObrisiRedMeni.TabIndex = 6;
-            this.btnObrisiRedMeni.Text = "Obrisi red";
-            this.btnObrisiRedMeni.UseVisualStyleBackColor = true;
-            // 
-            // btnDodajRedMeni
-            // 
-            this.btnDodajRedMeni.Location = new System.Drawing.Point(6, 254);
-            this.btnDodajRedMeni.Name = "btnDodajRedMeni";
-            this.btnDodajRedMeni.Size = new System.Drawing.Size(75, 23);
-            this.btnDodajRedMeni.TabIndex = 7;
-            this.btnDodajRedMeni.Text = "Dodaj red";
-            this.btnDodajRedMeni.UseVisualStyleBackColor = true;
-            // 
-            // label21
-            // 
-            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(3, 130);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(32, 13);
-            this.label21.TabIndex = 26;
-            this.label21.Text = "Cena";
-            // 
-            // txtCenaNaMeniju
-            // 
-            this.txtCenaNaMeniju.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCenaNaMeniju.Location = new System.Drawing.Point(80, 127);
-            this.txtCenaNaMeniju.Name = "txtCenaNaMeniju";
-            this.txtCenaNaMeniju.Size = new System.Drawing.Size(88, 20);
-            this.txtCenaNaMeniju.TabIndex = 27;
+            this.btnIzmeniRedSeSastoji.Location = new System.Drawing.Point(3, 257);
+            this.btnIzmeniRedSeSastoji.Name = "btnIzmeniRedSeSastoji";
+            this.btnIzmeniRedSeSastoji.Size = new System.Drawing.Size(75, 23);
+            this.btnIzmeniRedSeSastoji.TabIndex = 32;
+            this.btnIzmeniRedSeSastoji.Text = "Izmeni red";
+            this.btnIzmeniRedSeSastoji.UseVisualStyleBackColor = true;
             // 
             // GlavnaForma
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(655, 428);
+            this.ClientSize = new System.Drawing.Size(858, 437);
             this.Controls.Add(this.tabovi);
             this.Name = "GlavnaForma";
             this.Text = "Restoran";
+            this.Load += new System.EventHandler(this.GlavnaForma_Load);
             this.tabPage2.ResumeLayout(false);
             this.splitContainer6.Panel1.ResumeLayout(false);
             this.splitContainer6.Panel1.PerformLayout();
@@ -1144,7 +1238,20 @@ namespace Klijent
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabContTabele.ResumeLayout(false);
+            this.meniTab.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgwMeni)).EndInit();
             this.tabPage4.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel1.PerformLayout();
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgwJelo)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel1.PerformLayout();
@@ -1179,19 +1286,6 @@ namespace Klijent
             this.tabPage11.PerformLayout();
             this.tabovi.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgwMeni1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgwMeni)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgwJelo)).EndInit();
-            this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel1.PerformLayout();
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
-            this.splitContainer2.ResumeLayout(false);
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
-            this.meniTab.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1285,6 +1379,13 @@ namespace Klijent
         private System.Windows.Forms.DataGridView dgwJelo;
         private System.Windows.Forms.TextBox txtCenaNaMeniju;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox txtVrednostParametra;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Button btnIzmeniRedMeni;
+        private System.Windows.Forms.Button btnIzmeniRedJelo;
+        private System.Windows.Forms.Button btnIzmeniRedSastojak;
+        private System.Windows.Forms.Button btnIzmeniRedNaMeniju;
+        private System.Windows.Forms.Button btnIzmeniRedSeSastoji;
     }
 }
 
