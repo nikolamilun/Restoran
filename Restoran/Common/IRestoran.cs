@@ -32,6 +32,15 @@ namespace Common
         [OperationContract]
         [FaultContract(typeof(Izuzetak))]
         List<Jelo> jelaPremaMeniju(int idMenija);
+        [OperationContract]
+        [FaultContract(typeof(Izuzetak))]
+        int InsertIntoMeni(string naziv, bool aktivan);
+        [OperationContract]
+        [FaultContract(typeof(Izuzetak))]
+        int InsertIntoJelo(string naziv, string opis);
+        [OperationContract]
+        [FaultContract(typeof(Izuzetak))]
+        int InsertIntoSastojak(string naziv, string opis);
         // Vraca listu svih jela koja sadrze odredjeni sastojak
         [OperationContract]
         List<Jelo> jelaPremaSastojku(int idSastojka);
