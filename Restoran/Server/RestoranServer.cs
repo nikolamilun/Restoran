@@ -12,7 +12,7 @@ namespace Server
 {
     class RestoranServer : IRestoran
     {
-        public static string connString = @"data source=LIMUNPC\NIKOLASRVSQL;initial catalog=Restoran;trusted_connection=true";
+        public static string connString = @"data source=LIMUNPC\NIKOLASRVSQL;initial catalog=Restoran;trusted_connection=true; MultipleActiveResultSets=True";
         
         // Sluzi za vracanje lista jela po SQL komandi
         public List<Jelo> jelaPoUnesenojKomandi(string cmdText)
@@ -34,6 +34,7 @@ namespace Server
             }
             catch (Exception exc)
             {
+                Console.WriteLine(exc.Message);
                 throw new FaultException<Izuzetak>(new Izuzetak(exc.Message));
             }
         }
@@ -45,17 +46,42 @@ namespace Server
 
         public List<Jelo> jelaPremaBrojuSastojaka(int brSastojaka)
         {
-            return jelaPoUnesenojKomandi("SELECT j.*, COUNT(ss.id_sastojka) FROM Jelo AS j, SeSastoji AS ss, Sastojci AS s WHERE j.id_jela = ss.id_jela AND s.id_sastojka = ss.id_sastojka GROUP BY j.* HAVING COUNT(ss.id_sastojka) >= " + brSastojaka + ";") ;
+            try
+            {
+                List<Jelo> izlaz = new List<Jelo>();
+                using (SqlConnection conn = new SqlConnection(connString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT j.id_jela FROM Jelo AS j, SeSastoji AS ss, Sastojci AS s WHERE j.id_jela = ss.id_jela AND s.id_sastojka = ss.id_sastojka GROUP BY j.id_jela HAVING COUNT(ss.id_sastojka) > " + brSastojaka + ";", conn);
+                    SqlDataReader sdr = cmd.ExecuteReader();
+                    while (sdr.Read())
+                    {
+                        int id = sdr.GetInt32(0);
+                        SqlCommand cmd1 = new SqlCommand("SELECT * FROM Jelo WHERE id_jela = " + id + ";", conn);
+                        SqlDataReader sdr1 = cmd1.ExecuteReader();
+                        while (sdr1.Read())
+                        {
+                            izlaz.Add(new Jelo(sdr1.GetInt32(0), sdr1.GetString(1), sdr1.GetString(2)));
+                        }
+                    }
+                }
+                return izlaz;
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine(exc.Message);
+                throw new FaultException<Izuzetak>(new Izuzetak(exc.Message));
+            }
         }
 
         public List<Jelo> jelaPremaMeniju(int idMenija)
         {
-            return jelaPoUnesenojKomandi("SELECT j.* FROM jelo AS j, meni AS m, naMeniju AS nm WHERE j.id_jela = nm.id_jela AND nm.id_menija = " + idMenija + ";");
+            return jelaPoUnesenojKomandi("SELECT j.* FROM jelo AS j, naMeniju AS nm WHERE j.id_jela = nm.id_jela AND nm.id_menija = " + idMenija + ";");
         }
 
         public List<Jelo> jelaPremaSastojku(int idSastojka)
         {
-            return jelaPoUnesenojKomandi("SELECT j.* FROM jelo AS J, sastojci AS s, seSastoji AS ss WHERE j.id_jela = ss.id_jela AND ss.id_sastojka = " + idSastojka + ";");
+            return jelaPoUnesenojKomandi("SELECT j.* FROM jelo AS J, seSastoji AS ss WHERE j.id_jela = ss.id_jela AND ss.id_sastojka = " + idSastojka + ";");
         }
 
         public DataSet PreuzmiDataSet()
@@ -98,9 +124,9 @@ namespace Server
                     conn.Open();
                     // SQLDataAdapteri za svaku tabelu posebno
                     // Takodje i njihove funkcije za update-ovanje podataka
-                    #region SQLAdapteri sa komandama
+                    #region SQLDataAdapteri sa komandama
                     SqlDataAdapter sdaJelo = new SqlDataAdapter("SELECT * FROM jelo", conn);
-                    sdaJelo.UpdateCommand = new SqlCommand("UPDATE * FROM Jelo SET id_jela = @id_jela, naziv_jela = @naziv_jela, opis_jela = @opis_jela WHERE id_jela = @id_jela", conn);
+                    sdaJelo.UpdateCommand = new SqlCommand("UPDATE * FROM Jelo SET naziv_jela = @naziv_jela, opis_jela = @opis_jela WHERE id_jela = @id_jela", conn);
                     sdaJelo.UpdateCommand.Parameters.Add("@id_jela", SqlDbType.Int);
                     sdaJelo.UpdateCommand.Parameters["@id_jela"].SourceColumn = "id_jela";
                     sdaJelo.UpdateCommand.Parameters.Add("@naziv_jela", SqlDbType.NVarChar, 50, "naziv_jela");
@@ -111,7 +137,7 @@ namespace Server
                     sdaJelo.DeleteCommand.Parameters["@id_jela"].SourceColumn = "id_jela";
 
                     SqlDataAdapter sdaMeni = new SqlDataAdapter("SELECT * FROM meni", conn);
-                    sdaMeni.UpdateCommand = new SqlCommand("UPDATE Meni SET id_menija = @id_menija, naziv_menija = @naziv_menija, aktivan = @aktivan WHERE id_menija = @id_menija", conn);
+                    sdaMeni.UpdateCommand = new SqlCommand("UPDATE Meni SET naziv_menija = @naziv_menija, aktivan = @aktivan WHERE id_menija = @id_menija", conn);
                     sdaMeni.UpdateCommand.Parameters.Add("@id_menija", SqlDbType.Int);
                     sdaMeni.UpdateCommand.Parameters["@id_menija"].SourceColumn = "id_menija";
                     sdaMeni.UpdateCommand.Parameters.Add("@naziv_menija", SqlDbType.NVarChar, 50, "naziv_menija");
@@ -122,7 +148,7 @@ namespace Server
                     sdaMeni.DeleteCommand.Parameters["@id_menija"].SourceColumn = "id_menija";
 
                     SqlDataAdapter sdaSastojci = new SqlDataAdapter("SELECT * FROM sastojci", conn);
-                    sdaSastojci.UpdateCommand = new SqlCommand("UPDATE Sastojci SET id_sastojka = @id_sastojka, naziv_sastojka = @naziv_sastojka, opis_sastojka = @opis_sastojka WHERE id_sastojka = @id_sastojka", conn);
+                    sdaSastojci.UpdateCommand = new SqlCommand("UPDATE Sastojci SET naziv_sastojka = @naziv_sastojka, opis_sastojka = @opis_sastojka WHERE id_sastojka = @id_sastojka", conn);
                     sdaSastojci.UpdateCommand.Parameters.Add("@id_sastojka", SqlDbType.Int);
                     sdaSastojci.UpdateCommand.Parameters["@id_sastojka"].SourceColumn = "id_sastojka";
                     sdaSastojci.UpdateCommand.Parameters.Add("@naziv_sastojka", SqlDbType.NVarChar, 50, "naziv_sastojka");
@@ -145,21 +171,34 @@ namespace Server
                     sdaNaMeniju.DeleteCommand.Parameters["@id_jela"].SourceColumn = "id_jela";
                     sdaNaMeniju.DeleteCommand.Parameters.Add("@id_menija", SqlDbType.Int);
                     sdaNaMeniju.DeleteCommand.Parameters["@id_menija"].SourceColumn = "id_menija";
+                    sdaNaMeniju.InsertCommand = new SqlCommand("INSERT INTO NaMeniju VALUES (@id_menija, @id_jela, @cena)", conn);
+                    sdaNaMeniju.InsertCommand.Parameters.Add("@id_jela", SqlDbType.Int);
+                    sdaNaMeniju.InsertCommand.Parameters["@id_jela"].SourceColumn = "id_jela";
+                    sdaNaMeniju.InsertCommand.Parameters.Add("@id_menija", SqlDbType.Int);
+                    sdaNaMeniju.InsertCommand.Parameters["@id_menija"].SourceColumn = "id_menija";
+                    sdaNaMeniju.InsertCommand.Parameters.Add("@cena", SqlDbType.BigInt);
+                    sdaNaMeniju.InsertCommand.Parameters["@cena"].SourceColumn = "cena";
 
                     SqlDataAdapter sdaSeSastoji = new SqlDataAdapter("SELECT * FROM seSastoji", conn);
-                    sdaNaMeniju.UpdateCommand = new SqlCommand("UPDATE seSastoji SET id_jela = @id_jela, id_sastojka = @id_sastojka, kolicina = @kolicina WHERE id_jela = @id_jela AND id_sastojka = @id_sastojka", conn);
-                    sdaNaMeniju.UpdateCommand.Parameters.Add("@id_jela", SqlDbType.Int);
-                    sdaNaMeniju.UpdateCommand.Parameters["@id_jela"].SourceColumn = "id_jela";
-                    sdaNaMeniju.UpdateCommand.Parameters.Add("@id_sastojka", SqlDbType.Int);
-                    sdaNaMeniju.UpdateCommand.Parameters["@id_sastojka"].SourceColumn = "id_sastojka";
-                    sdaNaMeniju.UpdateCommand.Parameters.Add("@kolicina", SqlDbType.Int);
-                    sdaNaMeniju.UpdateCommand.Parameters["@kolicina"].SourceColumn = "kolicina";
-                    sdaNaMeniju.DeleteCommand = new SqlCommand("DELETE FROM NaMeniju WHERE id_jela = @id_jela AND id_sastojka = @id_sastojka", conn);
-                    sdaNaMeniju.DeleteCommand.Parameters.Add("@id_jela", SqlDbType.Int);
-                    sdaNaMeniju.DeleteCommand.Parameters["@id_jela"].SourceColumn = "id_jela";
-                    sdaNaMeniju.DeleteCommand.Parameters.Add("@id_sastojka", SqlDbType.Int);
-                    sdaNaMeniju.DeleteCommand.Parameters["@id_sastojka"].SourceColumn = "id_sastojka";
-
+                    sdaSeSastoji.UpdateCommand = new SqlCommand("UPDATE seSastoji SET id_jela = @id_jela, id_sastojka = @id_sastojka, kolicina = @kolicina WHERE id_jela = @id_jela AND id_sastojka = @id_sastojka", conn);
+                    sdaSeSastoji.UpdateCommand.Parameters.Add("@id_jela", SqlDbType.Int);
+                    sdaSeSastoji.UpdateCommand.Parameters["@id_jela"].SourceColumn = "id_jela";
+                    sdaSeSastoji.UpdateCommand.Parameters.Add("@id_sastojka", SqlDbType.Int);
+                    sdaSeSastoji.UpdateCommand.Parameters["@id_sastojka"].SourceColumn = "id_sastojka";
+                    sdaSeSastoji.UpdateCommand.Parameters.Add("@kolicina", SqlDbType.Int);
+                    sdaSeSastoji.UpdateCommand.Parameters["@kolicina"].SourceColumn = "kolicina";
+                    sdaSeSastoji.DeleteCommand = new SqlCommand("DELETE FROM NaMeniju WHERE id_jela = @id_jela AND id_sastojka = @id_sastojka", conn);
+                    sdaSeSastoji.DeleteCommand.Parameters.Add("@id_jela", SqlDbType.Int);
+                    sdaSeSastoji.DeleteCommand.Parameters["@id_jela"].SourceColumn = "id_jela";
+                    sdaSeSastoji.DeleteCommand.Parameters.Add("@id_sastojka", SqlDbType.Int);
+                    sdaSeSastoji.DeleteCommand.Parameters["@id_sastojka"].SourceColumn = "id_sastojka";
+                    sdaSeSastoji.InsertCommand = new SqlCommand("INSERT INTO SeSastoji VALUES (@id_sastojka, @id_jela, @kolicina)", conn);
+                    sdaSeSastoji.InsertCommand.Parameters.Add("@id_jela", SqlDbType.Int);
+                    sdaSeSastoji.InsertCommand.Parameters["@id_jela"].SourceColumn = "id_jela";
+                    sdaSeSastoji.InsertCommand.Parameters.Add("@id_sastojka", SqlDbType.Int);
+                    sdaSeSastoji.InsertCommand.Parameters["@id_sastojka"].SourceColumn = "id_sastojka";
+                    sdaSeSastoji.InsertCommand.Parameters.Add("@kolicina", SqlDbType.BigInt);
+                    sdaSeSastoji.InsertCommand.Parameters["@kolicina"].SourceColumn = "kolicina";
                     #endregion
 
                     // Unosenje izmena u bazu preko SQLDataAdaptera

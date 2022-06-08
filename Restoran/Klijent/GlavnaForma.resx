@@ -117,4 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value>Pozdrav, korisnice!
+Ova aplikacija je podeljena u vise tabova, po funkcionalnostima
+
+Prikaz i izmena podataka:
+U ovoj sekciji se sastoje tabovi za prikaz i izmenu podataka, kao i opcije specijalne pretrage.
+Podaci se unose, menjaju i brisu preko textBox-ova pored tabela gde se prikazuju podaci.
+CheckBox pored kojeg pise "Mod za unos",  odredjuje da li trenutno menjate podatke ili unosite nove. (ne mozete uneti novi podatak ako nije otkacen)
+U tabu "Specijalna pretraga" pretrazujete tabele po parametrima naznacenim u tekstu zadatka.
+
+Pretraga po parametrima:
+U ovoj sekciji imate izbor po svakoj tabeli i parametru koji mozete pretraziti. NAPOMENA: morate izabrati i tabelu i parametar da biste pretrazili.
+
+Pri zatvaranju aplikacije izmene se upisuju u bazu podataka.</value>
+  </data>
 </root>

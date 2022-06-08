@@ -45,11 +45,7 @@
     <Compile Include="IRestoran.cs" />
     <Compile Include="Izuzetak.cs" />
     <Compile Include="Jelo.cs" />
-    <Compile Include="Meni.cs" />
-    <Compile Include="NaMeniju.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sastojak.cs" />
-    <Compile Include="SeSastoji.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
