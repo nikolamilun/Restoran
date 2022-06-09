@@ -12,6 +12,7 @@ namespace Server
 {
     class RestoranServer : IRestoran
     {
+        // String koji odredjuje specifikacije veze sa tabelom
         public static string connString = @"data source=LIMUNPC\NIKOLASRVSQL;initial catalog=Restoran;trusted_connection=true; MultipleActiveResultSets=True";
         
         // Sluzi za vracanje lista jela po SQL komandi
@@ -19,14 +20,18 @@ namespace Server
         {
             try
             {
+                // Otvara se konekcija
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
                     conn.Open();
+                    // Lista jela koja se prosledjuje
                     List<Jelo> izlaz = new List<Jelo>();
+                    // Komanda koja se salje bazi
                     SqlCommand cmd = new SqlCommand(cmdText, conn);
                     SqlDataReader sdr = cmd.ExecuteReader();
                     while (sdr.Read())
                     {
+                        // SDR cita podatke i ubacuje ih u listu
                         izlaz.Add(new Jelo(sdr.GetInt32(0), sdr.GetString(1), sdr.GetString(2)));
                     }
                     return izlaz;
@@ -41,6 +46,7 @@ namespace Server
 
         public List<Jelo> jelaNaMenijimaKojiSuAktivniSaCenom(int cena)
         {
+            // sva jela koja su na meniju koji je aktivan i imaju cenu manju od one u parametru
             return jelaPoUnesenojKomandi("SELECT j.* FROM Jelo AS j, Meni AS m, NaMeniju AS nm WHERE m.Aktivan = 1 AND m.id_menija = nm.id_menija AND nm.id_jela = j.id_jela AND nm.cena <= " + cena + ";");
         }
 
@@ -48,19 +54,24 @@ namespace Server
         {
             try
             {
+                // Svako jelo koje ima broj sastojaka veci od unesenog
                 List<Jelo> izlaz = new List<Jelo>();
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
+                    // Otvara se konekcija
                     conn.Open();
+                    // Preuzimaju se primarni kljucevi svih takvih jela
                     SqlCommand cmd = new SqlCommand("SELECT j.id_jela FROM Jelo AS j, SeSastoji AS ss, Sastojci AS s WHERE j.id_jela = ss.id_jela AND s.id_sastojka = ss.id_sastojka GROUP BY j.id_jela HAVING COUNT(ss.id_sastojka) > " + brSastojaka + ";", conn);
                     SqlDataReader sdr = cmd.ExecuteReader();
                     while (sdr.Read())
                     {
+                        // Za svaki primarni kljuc iz proslog reader-a se uzimaju svi podaci tog jela
                         int id = sdr.GetInt32(0);
                         SqlCommand cmd1 = new SqlCommand("SELECT * FROM Jelo WHERE id_jela = " + id + ";", conn);
                         SqlDataReader sdr1 = cmd1.ExecuteReader();
                         while (sdr1.Read())
                         {
+                            // Svako jelo se ubacuje u listu
                             izlaz.Add(new Jelo(sdr1.GetInt32(0), sdr1.GetString(1), sdr1.GetString(2)));
                         }
                     }
@@ -76,18 +87,22 @@ namespace Server
 
         public List<Jelo> jelaPremaMeniju(int idMenija)
         {
+            // Sva jela sa odredjenog menija
             return jelaPoUnesenojKomandi("SELECT j.* FROM jelo AS j, naMeniju AS nm WHERE j.id_jela = nm.id_jela AND nm.id_menija = " + idMenija + ";");
         }
 
         public List<Jelo> jelaPremaSastojku(int idSastojka)
         {
+            // Sva jela koja sadrze odredjeni sastojak
             return jelaPoUnesenojKomandi("SELECT j.* FROM jelo AS J, seSastoji AS ss WHERE j.id_jela = ss.id_jela AND ss.id_sastojka = " + idSastojka + ";");
         }
 
-        public DataSet PreuzmiDataSet()
+        public DataSet PosaljiDataSet()
         {
+            // Popunjava DataSet podacima iz baze i salje ga klijentu
             try
             {
+                // Konekcija
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
                     conn.Open();
@@ -117,6 +132,7 @@ namespace Server
 
         public bool vratiDataSet(DataSet podaciDataSet)
         {
+            // Uzima DataSet od klijenta i preko njega update-uje bazu podataka preko SDR-ova
             try
             {
                 using (SqlConnection conn = new SqlConnection(connString))
@@ -125,16 +141,22 @@ namespace Server
                     // SQLDataAdapteri za svaku tabelu posebno
                     // Takodje i njihove funkcije za update-ovanje podataka
                     #region SQLDataAdapteri sa komandama
+                    // Pravi se novi SDA
                     SqlDataAdapter sdaJelo = new SqlDataAdapter("SELECT * FROM jelo", conn);
+                    // UpdateCommand sluzi da odredi kako SDA osvezava podatke u bazi
                     sdaJelo.UpdateCommand = new SqlCommand("UPDATE * FROM Jelo SET naziv_jela = @naziv_jela, opis_jela = @opis_jela WHERE id_jela = @id_jela", conn);
                     sdaJelo.UpdateCommand.Parameters.Add("@id_jela", SqlDbType.Int);
                     sdaJelo.UpdateCommand.Parameters["@id_jela"].SourceColumn = "id_jela";
                     sdaJelo.UpdateCommand.Parameters.Add("@naziv_jela", SqlDbType.NVarChar, 50, "naziv_jela");
                     sdaJelo.UpdateCommand.Parameters.Add("@opis_jela", SqlDbType.Text);
                     sdaJelo.UpdateCommand.Parameters["@opis_jela"].SourceColumn = "opis_jela";
+                    // DeleteCommand sluzi da odredi kako SDA brise podatke u bazi
                     sdaJelo.DeleteCommand = new SqlCommand("DELETE FROM Jelo WHERE id_jela = @id_jela", conn);
                     sdaJelo.DeleteCommand.Parameters.Add("@id_jela", SqlDbType.Int);
                     sdaJelo.DeleteCommand.Parameters["@id_jela"].SourceColumn = "id_jela";
+                    
+                    // VAZNO
+                    // KOMENTAR IZNAD VAZI ZA SVAKI SDA
 
                     SqlDataAdapter sdaMeni = new SqlDataAdapter("SELECT * FROM meni", conn);
                     sdaMeni.UpdateCommand = new SqlCommand("UPDATE Meni SET naziv_menija = @naziv_menija, aktivan = @aktivan WHERE id_menija = @id_menija", conn);
@@ -222,10 +244,13 @@ namespace Server
         {
             try
             {
+                // Konekcija
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
                     conn.Open();
+                    // U bazu se unosi novi red sa datim vrednostima i vraca se query sa ID-jem koji je dodat
                     SqlCommand cmd = new SqlCommand("INSERT INTO Meni VALUES ('" + naziv + "', " + (aktivan?1:0).ToString() + "); select @@identity;", conn);
+                    // ExecuteScalar preuzima taj ID
                     int ret = int.Parse(cmd.ExecuteScalar().ToString());
                     return ret;
                 }
@@ -243,9 +268,10 @@ namespace Server
             {
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
+                    // -||- linija 251
                     conn.Open();
                     SqlCommand cmd = new SqlCommand("INSERT INTO Jelo VALUES ('" + naziv + "', '" + opis + "'); SELECT @@identity;", conn);
-                    int ret = (int)cmd.ExecuteScalar();
+                    int ret = int.Parse(cmd.ExecuteScalar().ToString());
                     return ret;
                 }
             }
@@ -262,14 +288,16 @@ namespace Server
             {
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
+                    // -||- linija 251
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("INSERT INTO Sastojak VALUES ('" + naziv + "', '" + opis + "');  SELECT @@identity;", conn);
-                    int ret = (int)cmd.ExecuteScalar();
+                    SqlCommand cmd = new SqlCommand("INSERT INTO Sastojci VALUES ('" + naziv + "', '" + opis + "');  SELECT @@identity;", conn);
+                    int ret = int.Parse(cmd.ExecuteScalar().ToString());
                     return ret;
                 }
             }
             catch (Exception exc)
             {
+                Console.WriteLine(exc.Message) ;
                 throw new FaultException<Izuzetak>(new Izuzetak(exc.Message));
             }
         }

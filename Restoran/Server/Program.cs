@@ -14,9 +14,12 @@ namespace Server
         {
             try
             {
+                // Otvara se host za servis
                 using (ServiceHost host = new ServiceHost(typeof(RestoranServer)))
                 {
+                    // Dodaje se endpoint na koji se povezuje klijent
                     host.AddServiceEndpoint(typeof(IRestoran), new BasicHttpBinding(), new Uri("http://localhost:8000"));
+                    // Host se otvara
                     host.Open();
                     Console.WriteLine("Server je pokrenut!");
                     Console.ReadKey();

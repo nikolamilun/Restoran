@@ -133,6 +133,7 @@ namespace Klijent
             this.tabovi = new System.Windows.Forms.TabControl();
             this.dgwMeni1 = new System.Windows.Forms.DataGridView();
             this.lblIdMenija = new System.Windows.Forms.Label();
+            this.chbAktivanPretraga = new System.Windows.Forms.CheckBox();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer6)).BeginInit();
             this.splitContainer6.Panel1.SuspendLayout();
@@ -205,6 +206,7 @@ namespace Klijent
             // 
             // splitContainer6.Panel1
             // 
+            this.splitContainer6.Panel1.Controls.Add(this.chbAktivanPretraga);
             this.splitContainer6.Panel1.Controls.Add(this.btnPretraziParametri);
             this.splitContainer6.Panel1.Controls.Add(this.txtVrednostParametra);
             this.splitContainer6.Panel1.Controls.Add(this.label22);
@@ -252,11 +254,13 @@ namespace Klijent
             // cbIzaberiteParametar
             // 
             this.cbIzaberiteParametar.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.cbIzaberiteParametar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbIzaberiteParametar.FormattingEnabled = true;
             this.cbIzaberiteParametar.Location = new System.Drawing.Point(412, 34);
             this.cbIzaberiteParametar.Name = "cbIzaberiteParametar";
             this.cbIzaberiteParametar.Size = new System.Drawing.Size(121, 21);
             this.cbIzaberiteParametar.TabIndex = 3;
+            this.cbIzaberiteParametar.SelectedIndexChanged += new System.EventHandler(this.cbIzaberiteParametar_SelectedIndexChanged);
             // 
             // label16
             // 
@@ -271,6 +275,7 @@ namespace Klijent
             // cbIzaberiteTabelu
             // 
             this.cbIzaberiteTabelu.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.cbIzaberiteTabelu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbIzaberiteTabelu.FormattingEnabled = true;
             this.cbIzaberiteTabelu.Location = new System.Drawing.Point(135, 34);
             this.cbIzaberiteTabelu.Name = "cbIzaberiteTabelu";
@@ -715,7 +720,7 @@ namespace Klijent
             // 
             this.splitContainer3.Panel2.Controls.Add(this.dgwSastojak);
             this.splitContainer3.Size = new System.Drawing.Size(860, 365);
-            this.splitContainer3.SplitterDistance = 373;
+            this.splitContainer3.SplitterDistance = 372;
             this.splitContainer3.TabIndex = 1;
             // 
             // chbMZUSastojak
@@ -772,7 +777,7 @@ namespace Klijent
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNazivSastojkaSastojak.Location = new System.Drawing.Point(110, 86);
             this.txtNazivSastojkaSastojak.Name = "txtNazivSastojkaSastojak";
-            this.txtNazivSastojkaSastojak.Size = new System.Drawing.Size(158, 20);
+            this.txtNazivSastojkaSastojak.Size = new System.Drawing.Size(157, 20);
             this.txtNazivSastojkaSastojak.TabIndex = 21;
             // 
             // txtOpisSastojkaSastojak
@@ -782,7 +787,7 @@ namespace Klijent
             this.txtOpisSastojkaSastojak.Location = new System.Drawing.Point(110, 135);
             this.txtOpisSastojkaSastojak.Multiline = true;
             this.txtOpisSastojkaSastojak.Name = "txtOpisSastojkaSastojak";
-            this.txtOpisSastojkaSastojak.Size = new System.Drawing.Size(158, 80);
+            this.txtOpisSastojkaSastojak.Size = new System.Drawing.Size(157, 80);
             this.txtOpisSastojkaSastojak.TabIndex = 20;
             // 
             // txtIDSastojkaSastojak
@@ -792,7 +797,7 @@ namespace Klijent
             this.txtIDSastojkaSastojak.Enabled = false;
             this.txtIDSastojkaSastojak.Location = new System.Drawing.Point(110, 43);
             this.txtIDSastojkaSastojak.Name = "txtIDSastojkaSastojak";
-            this.txtIDSastojkaSastojak.Size = new System.Drawing.Size(158, 20);
+            this.txtIDSastojkaSastojak.Size = new System.Drawing.Size(157, 20);
             this.txtIDSastojkaSastojak.TabIndex = 19;
             // 
             // label8
@@ -836,7 +841,7 @@ namespace Klijent
             this.dgwSastojak.MultiSelect = false;
             this.dgwSastojak.Name = "dgwSastojak";
             this.dgwSastojak.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgwSastojak.Size = new System.Drawing.Size(483, 365);
+            this.dgwSastojak.Size = new System.Drawing.Size(484, 365);
             this.dgwSastojak.TabIndex = 1;
             this.dgwSastojak.SelectionChanged += new System.EventHandler(this.dgwSastojak_SelectionChanged);
             // 
@@ -925,6 +930,7 @@ namespace Klijent
             // 
             this.cbIDJelaNaMeniju.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbIDJelaNaMeniju.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbIDJelaNaMeniju.FormattingEnabled = true;
             this.cbIDJelaNaMeniju.Location = new System.Drawing.Point(80, 83);
             this.cbIDJelaNaMeniju.Name = "cbIDJelaNaMeniju";
@@ -935,6 +941,7 @@ namespace Klijent
             // 
             this.cbIDMenijaNaMeniju.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbIDMenijaNaMeniju.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbIDMenijaNaMeniju.FormattingEnabled = true;
             this.cbIDMenijaNaMeniju.Location = new System.Drawing.Point(80, 45);
             this.cbIDMenijaNaMeniju.Name = "cbIDMenijaNaMeniju";
@@ -956,9 +963,9 @@ namespace Klijent
             // 
             this.btnObrisiRedNaMeniju.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnObrisiRedNaMeniju.Enabled = false;
-            this.btnObrisiRedNaMeniju.Location = new System.Drawing.Point(3, 196);
+            this.btnObrisiRedNaMeniju.Location = new System.Drawing.Point(3, 188);
             this.btnObrisiRedNaMeniju.Name = "btnObrisiRedNaMeniju";
-            this.btnObrisiRedNaMeniju.Size = new System.Drawing.Size(75, 23);
+            this.btnObrisiRedNaMeniju.Size = new System.Drawing.Size(75, 31);
             this.btnObrisiRedNaMeniju.TabIndex = 22;
             this.btnObrisiRedNaMeniju.Text = "Obrisi red";
             this.btnObrisiRedNaMeniju.UseVisualStyleBackColor = true;
@@ -1082,6 +1089,7 @@ namespace Klijent
             // 
             // cbIDSastojkaSeSastoji
             // 
+            this.cbIDSastojkaSeSastoji.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbIDSastojkaSeSastoji.FormattingEnabled = true;
             this.cbIDSastojkaSeSastoji.Location = new System.Drawing.Point(80, 87);
             this.cbIDSastojkaSeSastoji.Name = "cbIDSastojkaSeSastoji";
@@ -1090,6 +1098,7 @@ namespace Klijent
             // 
             // cbIDJelaSeSastoji
             // 
+            this.cbIDJelaSeSastoji.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbIDJelaSeSastoji.FormattingEnabled = true;
             this.cbIDJelaSeSastoji.Location = new System.Drawing.Point(80, 49);
             this.cbIDJelaSeSastoji.Name = "cbIDJelaSeSastoji";
@@ -1295,6 +1304,7 @@ namespace Klijent
             // cbMeniJelaPrema
             // 
             this.cbMeniJelaPrema.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbMeniJelaPrema.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMeniJelaPrema.FormattingEnabled = true;
             this.cbMeniJelaPrema.Location = new System.Drawing.Point(309, 42);
             this.cbMeniJelaPrema.Name = "cbMeniJelaPrema";
@@ -1338,6 +1348,7 @@ namespace Klijent
             // cbSastojakJelaPrema
             // 
             this.cbSastojakJelaPrema.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbSastojakJelaPrema.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSastojakJelaPrema.FormattingEnabled = true;
             this.cbSastojakJelaPrema.Location = new System.Drawing.Point(329, 35);
             this.cbSastojakJelaPrema.Name = "cbSastojakJelaPrema";
@@ -1393,6 +1404,17 @@ namespace Klijent
             this.lblIdMenija.Name = "lblIdMenija";
             this.lblIdMenija.Size = new System.Drawing.Size(51, 13);
             this.lblIdMenija.TabIndex = 0;
+            // 
+            // chbAktivanPretraga
+            // 
+            this.chbAktivanPretraga.AutoSize = true;
+            this.chbAktivanPretraga.Enabled = false;
+            this.chbAktivanPretraga.Location = new System.Drawing.Point(651, 62);
+            this.chbAktivanPretraga.Name = "chbAktivanPretraga";
+            this.chbAktivanPretraga.Size = new System.Drawing.Size(161, 17);
+            this.chbAktivanPretraga.TabIndex = 7;
+            this.chbAktivanPretraga.Text = "Meni Aktivan (samo za meni)";
+            this.chbAktivanPretraga.UseVisualStyleBackColor = true;
             // 
             // GlavnaForma
             // 
@@ -1573,6 +1595,7 @@ namespace Klijent
         private System.Windows.Forms.Button btnPretraziParametri;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox chbAktivanPretraga;
     }
 }
 

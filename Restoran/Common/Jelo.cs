@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Common
 {
+    // Klasa koja predstavlja red u tabeli jelo, sluzi za olaksavanje prenosa podataka tokom pretrage
     public class Jelo
     {
         int id;

@@ -13,6 +13,7 @@ using Common;
 
 namespace Klijent
 {
+    // Ovi enum-ovi sluze da bi se olaksalo ispunjavanje comboBoxa u pretrazi poljima izabrane tabele (linija 669)
     enum PoljaMenija { id_menija, naziv_menija, aktivan}
     enum PoljaJela { id_jela, naziv_jela, opis_jela}
     enum PoljaSastojka { id_sastojka, naziv_sastojka, opis_sastojka}
@@ -20,7 +21,9 @@ namespace Klijent
     enum PoljaSeSastoji { id_jela, id_sastojka, kolicina }
     public partial class GlavnaForma : Form
     {
+        // Proksi za komunikaciju sa serverom
         static IRestoran proxy;
+        // DataSet kojim se manipulise podacima u celoj formi
         DataSet dsPodaci;
         public GlavnaForma()
         {
@@ -28,18 +31,22 @@ namespace Klijent
         }
 
         #region Pomocne funkcije
+        // Operacije koje se cesto koriste sam smestio u funkcije
         private void MsgBoxError(string errorMsg)
         {
+            // Prikazivanje errora korisniku sa unesenim tekstom
             MessageBox.Show(errorMsg, "Greska!", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private DialogResult MsgBoxQuestion(string questionMsg)
         {
+            // Prikazivanje pitanja korisniku sa unesenim tekstom, funkcija vraca odgovor
             return MessageBox.Show(questionMsg, "Pitanje", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
         }
 
         private void MsgBoxInfo(string infoMsg)
         {
+            // Prikazivanje pitanja korisniku sa unesenim tekstom
             MessageBox.Show(infoMsg, "Obavestenje", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -51,29 +58,37 @@ namespace Klijent
         #endregion
 
         #region Osvezavanje kontrola
+        // ComboBox-ovi se pune redovima iz tri osnovne tabele i nazivima svakog reda
         void osveziKontroleNaMeniju()
         {
             // Ubacivanje opcija u comboBox-ove za tabelu "Na meniju"
+            cbIDMenijaNaMeniju.Items.Clear();
             foreach (DataRow dr in dsPodaci.Tables["meni"].Rows)
-                cbIDMenijaNaMeniju.Items.Add(dr["id_menija"]);
+                cbIDMenijaNaMeniju.Items.Add(dr["id_menija"].ToString() + " - " + dr["naziv_menija"]);
+            cbIDJelaNaMeniju.Items.Clear();
             foreach (DataRow dr in dsPodaci.Tables["jelo"].Rows)
-                cbIDJelaNaMeniju.Items.Add(dr["id_jela"]);
+                cbIDJelaNaMeniju.Items.Add(dr["id_jela"].ToString() + " - " + dr["naziv_jela"]);
         }
 
         void osveziKontroleSeSastoji()
         {
             // Ubacivanje opcija u comboBox-ove za tabelu "Se sastoji"
+            cbIDSastojkaSeSastoji.Items.Clear();
             foreach (DataRow dr in dsPodaci.Tables["sastojci"].Rows)
                 cbIDSastojkaSeSastoji.Items.Add(dr["id_sastojka"].ToString() + " - " + dr["naziv_sastojka"]);
+            cbIDJelaSeSastoji.Items.Clear();
             foreach (DataRow dr in dsPodaci.Tables["jelo"].Rows)
-                cbIDJelaSeSastoji.Items.Add(dr["id_jela"].ToString() + " - " +  dr["naziv_jela"]);
+                cbIDJelaSeSastoji.Items.Add(dr["id_jela"].ToString() + " - " + dr["naziv_jela"]);
         }
 
         void osveziKontroleSpecPretraga()
         {
             // Ubacivanje opcija u comboBox-ove za specijalne pretrage
+            cbSastojakJelaPrema.Items.Clear();
             foreach (DataRow dr in dsPodaci.Tables["sastojci"].Rows)
-                cbSastojakJelaPrema.Items.Add(dr["id_sastojka"].ToString() + " - " + dr["naziv_sastojka"] );
+                cbSastojakJelaPrema.Items.Add(dr["id_sastojka"].ToString() + " - " + dr["naziv_sastojka"]);
+
+            cbMeniJelaPrema.Items.Clear();
             foreach (DataRow dr in dsPodaci.Tables["meni"].Rows)
                 cbMeniJelaPrema.Items.Add(dr["id_menija"].ToString() + " - " + dr["naziv_menija"]);
         }
@@ -85,12 +100,14 @@ namespace Klijent
             ChannelFactory<IRestoran> chf  = new ChannelFactory<IRestoran>(new BasicHttpBinding(), new EndpointAddress("http://localhost:8000"));
             proxy = chf.CreateChannel();
             // Preuzimanje dataSeta sa podacima iz baze i ubacivanje podataka u formu
-            dsPodaci = proxy.PreuzmiDataSet();
+            dsPodaci = proxy.PosaljiDataSet();
+            // Loadovanje podataka iz DataSeta u dgw-ove sa podacima
             dgwMeni.DataSource = dsPodaci.Tables["meni"];
             dgwJelo.DataSource = dsPodaci.Tables["jelo"];
             dgwSastojak.DataSource = dsPodaci.Tables["sastojci"];
             dgwNaMeniju.DataSource = dsPodaci.Tables["naMeniju"];
             dgwSeSastoji.DataSource = dsPodaci.Tables["seSastoji"];
+            // comboBox-ovi sa izborima redova se pune podacima
             osveziKontroleNaMeniju();
             osveziKontroleSeSastoji();
             osveziKontroleSpecPretraga();
@@ -101,11 +118,20 @@ namespace Klijent
 
         private void GlavnaForma_FormClosing(object sender, FormClosingEventArgs e)
         {
-            proxy.vratiDataSet(dsPodaci);
+            try
+            {
+                // Podaci se salju serveru radi upisa u bazu podataka
+                proxy.vratiDataSet(dsPodaci);
+            }
+            catch (Exception exc)
+            {
+                MsgBoxError("Greska pri upisivanju u bazu: " + exc.Message);
+            }
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Kada se promeni izabrani tab u specijalnoj pretrazi, podaci iz dgw-a se brisu
             dgwSpecijalnaPretraga.DataSource = null;
         }
 
@@ -113,58 +139,65 @@ namespace Klijent
         // Kontrole se popunjavaju podacima iz izabranog reda
         private void dgwMeni_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgwMeni.SelectedRows.Count != 0)
-            {
-                txtIDMenijaMeni.Text = dgwMeni.SelectedRows[0].Cells[0].Value.ToString();
-                txtNazivMenijaMeni.Text = dgwMeni.SelectedRows[0].Cells[1].Value.ToString();
-                chbMeniAktivanMeni.Checked = (bool)dgwMeni.SelectedRows[0].Cells[2].Value;
-            }
+            // Kontrole za uredjivanje tabele meni se pune podacima iz izabranog reda u dgw-u
+            txtIDMenijaMeni.Text = dgwMeni.SelectedRows[0].Cells[0].Value.ToString();
+            txtNazivMenijaMeni.Text = dgwMeni.SelectedRows[0].Cells[1].Value.ToString();
+            chbMeniAktivanMeni.Checked = (bool)dgwMeni.SelectedRows[0].Cells[2].Value;
         }
 
         private void dgwJelo_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgwJelo.SelectedRows.Count != 0)
-            {
-                txtIDJelaJelo.Text = dgwJelo.SelectedRows[0].Cells[0].Value.ToString();
-                txtNazivJelaJelo.Text = dgwJelo.SelectedRows[0].Cells[1].Value.ToString();
-                txtOpisJelaJelo.Text = dgwJelo.SelectedRows[0].Cells[2].Value.ToString();
-            }
+            // Kontrole za uredjivanje tabele jelo se pune podacima iz izabranog reda u dgw-u
+            txtIDJelaJelo.Text = dgwJelo.SelectedRows[0].Cells[0].Value.ToString();
+            txtNazivJelaJelo.Text = dgwJelo.SelectedRows[0].Cells[1].Value.ToString();
+            txtOpisJelaJelo.Text = dgwJelo.SelectedRows[0].Cells[2].Value.ToString();
         }
 
         private void dgwSastojak_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgwSastojak.SelectedRows.Count != 0)
-            {
-                txtIDSastojkaSastojak.Text = dgwSastojak.SelectedRows[0].Cells[0].Value.ToString();
-                txtNazivSastojkaSastojak.Text = dgwSastojak.SelectedRows[0].Cells[1].Value.ToString();
-                txtOpisSastojkaSastojak.Text = dgwSastojak.SelectedRows[0].Cells[2].Value.ToString();
-            }
+            // Kontrole za uredjivanje tabele "se sastoji" se pune podacima iz izabranog reda u dgw-u
+            txtIDSastojkaSastojak.Text = dgwSastojak.SelectedRows[0].Cells[0].Value.ToString();
+            txtNazivSastojkaSastojak.Text = dgwSastojak.SelectedRows[0].Cells[1].Value.ToString();
+            txtOpisSastojkaSastojak.Text = dgwSastojak.SelectedRows[0].Cells[2].Value.ToString();
         }
 
         private void dgwNaMeniju_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgwNaMeniju.SelectedRows.Count != 0)
-            {
-                cbIDMenijaNaMeniju.SelectedItem = dgwNaMeniju.SelectedRows[0].Cells[0].Value;
-                cbIDJelaNaMeniju.SelectedItem = dgwNaMeniju.SelectedRows[0].Cells[1].Value;
-                txtCenaNaMeniju.Text = dgwNaMeniju.SelectedRows[0].Cells[2].Value.ToString();
-            }
+            // U kontrolama se prikazuju iazbrane vrednosti
+            foreach(object sel in cbIDMenijaNaMeniju.Items)
+                // Proverava se da li je ID iz reda comboBox-a isti kao i ID izabranog reda u dgw-u
+                if(obradiComboBoxItem(sel) == (int)dgwNaMeniju.SelectedRows[0].Cells[0].Value)
+                    cbIDMenijaNaMeniju.SelectedItem = sel;
+            foreach (object sel in cbIDJelaNaMeniju.Items)
+                if (obradiComboBoxItem(sel) == (int)dgwNaMeniju.SelectedRows[0].Cells[1].Value)
+                    // -||- linija 161
+                    cbIDJelaNaMeniju.SelectedItem = sel;
+            txtCenaNaMeniju.Text = dgwNaMeniju.SelectedRows[0].Cells[2].Value.ToString();
         }
 
         private void dgwSeSastoji_SelectionChanged(object sender, EventArgs e)
         {
             if (dgwSeSastoji.SelectedRows.Count != 0)
             {
-                cbIDJelaSeSastoji.SelectedItem = dgwSeSastoji.SelectedRows[0].Cells[0].Value;
-                cbIDSastojkaSeSastoji.SelectedItem = dgwSeSastoji.SelectedRows[0].Cells[1].Value;
+                foreach (object sel in cbIDJelaSeSastoji.Items)
+                    if (obradiComboBoxItem(sel) == (int)dgwSeSastoji.SelectedRows[0].Cells[0].Value)
+                        // -||- linija 161
+                        cbIDJelaSeSastoji.SelectedItem = sel;
+                foreach (object sel in cbIDSastojkaSeSastoji.Items)
+                    if (obradiComboBoxItem(sel) == (int)dgwSeSastoji.SelectedRows[0].Cells[0].Value)
+                        // -||- linija 161
+                        cbIDSastojkaSeSastoji.SelectedItem = sel;
+                txtKolicinaSeSastoji.Text = dgwSeSastoji.SelectedRows[0].Cells[2].Value.ToString();
             }
         }
 
         #endregion
 
         #region Kontrola unosa
+        // Kontrolise se da li korisnik trenutno menja/brise red ili dodaje novi
         private void chbMZUMeni_CheckedChanged(object sender, EventArgs e)
         {
+            // Naizmenicno se pale i gase dugmad za izmenu/brisanje i dodavanje
             btnDodajRedMeni.Enabled = !btnDodajRedMeni.Enabled;
             btnObrisiRedMeni.Enabled = !btnObrisiRedMeni.Enabled;
             btnIzmeniRedMeni.Enabled = !btnIzmeniRedMeni.Enabled;
@@ -172,6 +205,7 @@ namespace Klijent
 
         private void chbMZUJelo_CheckedChanged(object sender, EventArgs e)
         {
+            // -||- linija 193
             btnDodajRedJelo.Enabled = !btnDodajRedJelo.Enabled;
             btnObrisiRedJelo.Enabled = !btnObrisiRedJelo.Enabled;
             btnIzmeniRedJelo.Enabled = !btnIzmeniRedJelo.Enabled;
@@ -179,6 +213,7 @@ namespace Klijent
 
         private void chbMZUSastojak_CheckedChanged(object sender, EventArgs e)
         {
+            // -||- linija 193
             btnDodajRedSastojak.Enabled = !btnDodajRedSastojak.Enabled;
             btnObrisiRedSastojak.Enabled = !btnObrisiRedSastojak.Enabled;
             btnIzmeniRedSastojak.Enabled = !btnIzmeniRedSastojak.Enabled;
@@ -186,6 +221,7 @@ namespace Klijent
 
         private void chbMZUNaMeniju_CheckedChanged(object sender, EventArgs e)
         {
+            // -||- linija 193
             btnDodajRedNaMeniju.Enabled = !btnDodajRedNaMeniju.Enabled;
             btnObrisiRedNaMeniju.Enabled = !btnObrisiRedNaMeniju.Enabled;
             btnIzmeniRedNaMeniju.Enabled = !btnIzmeniRedNaMeniju.Enabled;
@@ -193,6 +229,7 @@ namespace Klijent
 
         private void chbMZUSeSastoji_CheckedChanged(object sender, EventArgs e)
         {
+            // -||- linija 193
             btnDodajRedSeSastoji.Enabled = !btnDodajRedSeSastoji.Enabled;
             btnObrisiRedSeSastoji.Enabled = !btnObrisiRedSeSastoji.Enabled;
             btnIzmeniRedSeSastoji.Enabled = !btnIzmeniRedSeSastoji.Enabled;
@@ -200,6 +237,7 @@ namespace Klijent
 
         private void chbMZUSeSastoji_CheckedChanged_1(object sender, EventArgs e)
         {
+            // -||- linija 193
             btnDodajRedSeSastoji.Enabled = !btnDodajRedSeSastoji.Enabled;
             btnObrisiRedSeSastoji.Enabled = !btnObrisiRedSeSastoji.Enabled;
             btnIzmeniRedSeSastoji.Enabled = !btnIzmeniRedSeSastoji.Enabled;
@@ -207,20 +245,34 @@ namespace Klijent
         #endregion
 
         #region Dodavanje, Izmena, Brisanje
+        // Funkcije za korisnicku obradu podataka u dgw-ovima
         private void btnObrisiRedMeni_Click(object sender, EventArgs e)
         {
-            // Potvrda brisanja
-            if (MsgBoxQuestion("Da li stvarno zelite da izbrisete taj red?") == DialogResult.Yes)
+            try
             {
-                dgwMeni.Rows.Remove(dgwMeni.SelectedRows[0]);
-                dgwMeni.DataSource = dsPodaci.Tables["meni"];
-                MsgBoxInfo("Red uspesno obrisan!");
-                osveziKontroleNaMeniju();
-                osveziKontroleSpecPretraga();
+                // Potvrda brisanja
+                if (MsgBoxQuestion("Da li stvarno zelite da izbrisete taj red?") == DialogResult.Yes)
+                {
+                    // Brise se izabrani red
+                    dgwMeni.Rows.Remove(dgwMeni.SelectedRows[0]);
+                    // dgw se osvezava
+                    dgwMeni.DataSource = dsPodaci.Tables["meni"];
+                    MsgBoxInfo("Red uspesno obrisan!");
+                    // DataSet upisuje promene u dgw-u i kontrole se osvezavaju
+                    dsPodaci.AcceptChanges();
+                    osveziKontroleNaMeniju();
+                    osveziKontroleSpecPretraga();
+                }
+                else
+                {
+                    // Korisnik otkazao brisanje
+                    MsgBoxInfo("Red nije izbrisan");
+                }
             }
-            else
+            catch (Exception exc)
             {
-                MsgBoxInfo("Red nije izbrisan");
+                // U slucaju moguce greske pri brisanju reda, ona se prikazuje
+                MsgBoxError("Tekst greske: " + exc.Message);
             }
         }
 
@@ -228,21 +280,27 @@ namespace Klijent
         {
             try
             {
+                // Podaci se preuzimaju iz kontrola
                 string naziv = txtNazivMenijaMeni.Text;
                 bool aktivan = chbMeniAktivanMeni.Checked;
+                // Podaci se salju serveru na insertovanje i server vraca ID koji je generisala baza podataka
                 int id = proxy.InsertIntoMeni(naziv, aktivan);
+                // Pravi se novi red koji se ubacuje u DataSet
                 DataRow dr = dsPodaci.Tables["meni"].NewRow();
                 dr["id_menija"] = id;
                 dr["naziv_menija"] = naziv;
                 dr["aktivan"] = aktivan;
                 dsPodaci.Tables["meni"].Rows.Add(dr);
+                // dgw se osvezava
                 dgwMeni.DataSource = dsPodaci.Tables["meni"];
                 MsgBoxInfo("Red je uspesno unet!");
+                // Kontrole se osvezavaju
                 osveziKontroleNaMeniju();
                 osveziKontroleSpecPretraga();
             }
             catch (Exception exc)
             {
+                // U slucaju moguce greske pri dodavanju reda, ona se prikazuje
                 MsgBoxError("Tekst greske: " + exc.Message);
             }
         }
@@ -254,8 +312,10 @@ namespace Klijent
                 // Potvrda izmene
                 if (MsgBoxQuestion("Da li zelite da izmenite ovaj red?") == DialogResult.Yes)
                 {
+                    // Preuzimaju se podaci iz kontrola
                     string naziv = txtNazivMenijaMeni.Text;
                     bool aktivan = chbMeniAktivanMeni.Checked;
+                    // Trazi se red sa ID-jem podatka koji se menja i u njega se upisuju novi podaci
                     foreach (DataRow dr in dsPodaci.Tables["meni"].Rows)
                     {
                         if (dr["id_menija"].ToString() == dgwMeni.SelectedRows[0].Cells[0].Value.ToString())
@@ -264,7 +324,11 @@ namespace Klijent
                             dr["aktivan"] = aktivan;
                         }
                     }
+                    // dgw se osvezava
                     dgwMeni.DataSource = dsPodaci.Tables["meni"];
+                    // Kontrole se osvezavaju
+                    osveziKontroleNaMeniju();
+                    osveziKontroleSpecPretraga();
                     MsgBoxInfo("Red je izmenjen!");
                 }
                 else
@@ -278,11 +342,12 @@ namespace Klijent
 
         private void btnObrisiRedJelo_Click(object sender, EventArgs e)
         {
-            // Potvrda brisanja
+            // -||- linija 242
             if (MsgBoxQuestion("Da li stvarno zelite da izbrisete taj red?") == DialogResult.Yes)
             {
                 dgwJelo.Rows.Remove(dgwJelo.SelectedRows[0]);
                 dgwJelo.DataSource = dsPodaci.Tables["jelo"];
+                dsPodaci.AcceptChanges();
                 osveziKontroleSeSastoji();
                 osveziKontroleNaMeniju();
                 MsgBoxInfo("Red uspesno obrisan!");
@@ -295,6 +360,7 @@ namespace Klijent
 
         private void btnDodajRedJelo_Click(object sender, EventArgs e)
         {
+            // -||- linija 279
             try
             {
                 string naziv = txtNazivJelaJelo.Text;
@@ -320,7 +386,7 @@ namespace Klijent
         {
             try
             {
-                // Potvrda izmene
+                // -||- linija 308
                 if (MsgBoxQuestion("Da li zelite da izmenite ovaj red?") == DialogResult.Yes)
                 {
                     string naziv = txtNazivJelaJelo.Text;
@@ -334,6 +400,8 @@ namespace Klijent
                         }
                     }
                     dgwJelo.DataSource = dsPodaci.Tables["jelo"];
+                    osveziKontroleNaMeniju();
+                    osveziKontroleSeSastoji();
                     MsgBoxInfo("Red je izmenjen!");
                 }
                 else
@@ -347,11 +415,12 @@ namespace Klijent
 
         private void btnObrisiRedSastojak_Click(object sender, EventArgs e)
         {
-            // Potvrda brisanja
+            // -||- linija 242
             if (MsgBoxQuestion("Da li stvarno zelite da izbrisete taj red?") == DialogResult.Yes)
             {
                 dgwSastojak.Rows.Remove(dgwSastojak.SelectedRows[0]);
                 dgwSastojak.DataSource = dsPodaci.Tables["sastojci"];
+                dsPodaci.AcceptChanges();
                 osveziKontroleSpecPretraga();
                 osveziKontroleSeSastoji();
                 MsgBoxInfo("Red uspesno obrisan!");
@@ -366,11 +435,12 @@ namespace Klijent
         {
             try
             {
+                // -||- linija 279
                 string naziv = txtNazivSastojkaSastojak.Text;
                 string opis = txtOpisSastojkaSastojak.Text;
                 int id = proxy.InsertIntoSastojak(naziv, opis);
                 DataRow dr = dsPodaci.Tables["sastojci"].NewRow();
-                dr["id_sastojak"] = id;
+                dr["id_sastojka"] = id;
                 dr["naziv_sastojka"] = naziv;
                 dr["opis_sastojka"] = opis;
                 dsPodaci.Tables["sastojak"].Rows.Add(dr);
@@ -389,7 +459,7 @@ namespace Klijent
         {
             try
             {
-                // Potvrda izmene
+                // -||- linija 308
                 if (MsgBoxQuestion("Da li zelite da izmenite ovaj red?") == DialogResult.Yes)
                 {
                     string naziv = txtNazivSastojkaSastojak.Text;
@@ -416,7 +486,7 @@ namespace Klijent
 
         private void btnObrisiRedNaMeniju_Click(object sender, EventArgs e)
         {
-            // Potvrda brisanja
+            // -||- linija 242
             if (MsgBoxQuestion("Da li stvarno zelite da izbrisete taj red?") == DialogResult.Yes)
             {
                 dgwNaMeniju.Rows.Remove(dgwNaMeniju.SelectedRows[0]);
@@ -433,23 +503,29 @@ namespace Klijent
         {
             try
             {
+                // Podaci se uzimaju iz comboBoxova
                 int idjela = obradiComboBoxItem(cbIDJelaNaMeniju.SelectedItem);
                 int idmenija = obradiComboBoxItem(cbIDMenijaNaMeniju.SelectedItem);
                 // Odredjuje da li je korisnik izabrao dva ID-ja koja vec postoje u nekom redu
                 bool validno = true;
                 foreach (DataRow dr in dsPodaci.Tables["naMeniju"].Rows)
+                    // Da li su oba ID-ja ista kao izabrani
                     if ((int)dr["id_jela"] == idjela && (int)dr["id_menija"] == idmenija)
                         validno = false;
                 // Ako nije, red se unosi
                 if (validno)
                 {
+                    // Preuzima se i cena za unos, posto je utvrdjeno da je primarni kljuc validan
                     int cena = int.Parse(txtCenaNaMeniju.Text);
+                    // Pravi se novi red i unosi se u DataSet
                     DataRow dr = dsPodaci.Tables["naMeniju"].NewRow();
                     dr["id_menija"] = idmenija;
                     dr["id_jela"] = idjela;
                     dr["cena"] = cena;
                     dsPodaci.Tables["naMeniju"].Rows.Add(dr);
+                    // Osvezava se dgw
                     dgwNaMeniju.DataSource = dsPodaci.Tables["naMeniju"];
+                    MsgBoxInfo("Red uspesno dodat!");
                 }
                 else
                     MsgBoxError("Vec postoji objekat sa tim identitetom! Unesite drugacije ID-jeve!");
@@ -467,9 +543,22 @@ namespace Klijent
                 // Potvrda izmene
                 if (MsgBoxQuestion("Da li zelite da izmenite ovaj red?") == DialogResult.Yes)
                 {
+                    // Preuzimanje podataka iz comboBoxova i polja za cenu
                     int idjela = obradiComboBoxItem(cbIDJelaNaMeniju.SelectedItem);
                     int idmenija = obradiComboBoxItem(cbIDMenijaNaMeniju.SelectedItem);
                     int cena = int.Parse(txtCenaNaMeniju.Text);
+                    // Proverava se da li korisnik nije promenio primarne kljuceve
+                    if (idmenija != int.Parse(dgwNaMeniju.SelectedRows[0].Cells[0].Value.ToString()) || idjela != int.Parse(dgwNaMeniju.SelectedRows[0].Cells[1].Value.ToString()))
+                    {
+                        // Ako jeste, mora se proveriti da li postoji isti primarni kljuc
+                        foreach (DataRow dr in dsPodaci.Tables["naMeniju"].Rows)
+                            if ((int)dr["id_jela"] == idjela && (int)dr["id_menija"] == idmenija)
+                            {
+                                MsgBoxError("Vec postoji red sa tim identitetom!");
+                                return;
+                            }
+                    }
+                    // Ako nije promenio ili prodje proveru, red se menja
                     foreach (DataRow dr in dsPodaci.Tables["naMeniju"].Rows)
                     {
                         if (dr["id_menija"].ToString() == dgwNaMeniju.SelectedRows[0].Cells[0].Value.ToString() && dr["id_jela"].ToString() == dgwNaMeniju.SelectedRows[0].Cells[1].Value.ToString())
@@ -479,6 +568,7 @@ namespace Klijent
                             dr["cena"] = cena;
                         }
                     }
+                    // Osvezava se dgw
                     dgwNaMeniju.DataSource = dsPodaci.Tables["naMeniju"];
                     MsgBoxInfo("Red je izmenjen!");
                 }
@@ -493,7 +583,7 @@ namespace Klijent
 
         private void btnObrisiRedSeSastoji_Click(object sender, EventArgs e)
         {
-            // Potvrda brisanja
+            // -||- linija 242
             if (MsgBoxQuestion("Da li stvarno zelite da izbrisete taj red?") == DialogResult.Yes)
             {
                 dgwSeSastoji.Rows.Remove(dgwSeSastoji.SelectedRows[0]);
@@ -510,15 +600,14 @@ namespace Klijent
         {
             try
             {
+                // -||- linija 502
                 int idsastojka = obradiComboBoxItem(cbIDSastojkaSeSastoji.SelectedItem);
                 int idjela = obradiComboBoxItem(cbIDJelaSeSastoji.SelectedItem);
                 int kolicina = int.Parse(txtKolicinaSeSastoji.Text);
-                // Odredjuje da li je korisnik izabrao dva ID-ja koja vec postoje u nekom redu
                 bool validno = true;
                 foreach (DataRow dr in dsPodaci.Tables["seSastoji"].Rows)
                     if ((int)dr["id_jela"] == idjela && (int)dr["id_sastojka"] == idsastojka)
                         validno = false;
-                // Ako nije, red se menja
                 if (validno)
                 {
                     DataRow dr = dsPodaci.Tables["seSastoji"].NewRow();
@@ -527,6 +616,7 @@ namespace Klijent
                     dr["kolicina"] = kolicina;
                     dsPodaci.Tables["seSastoji"].Rows.Add(dr);
                     dgwSeSastoji.DataSource = dsPodaci.Tables["seSastoji"];
+                    MsgBoxInfo("Red je uspesno dodat!");
                 }
                 else
                     MsgBoxError("Vec postoji objekat sa tim identitetom! Unesite drugacije ID-jeve!");
@@ -541,12 +631,21 @@ namespace Klijent
         {
             try
             {
-                // Potvrda izmene
+                // -||- linija 539
                 if (MsgBoxQuestion("Da li zelite da izmenite ovaj red?") == DialogResult.Yes)
                 {
                     int idsastojka = obradiComboBoxItem(cbIDSastojkaSeSastoji.SelectedItem);
                     int idjela = obradiComboBoxItem(cbIDJelaSeSastoji.SelectedItem);
                     int kolicina = int.Parse(txtKolicinaSeSastoji.Text);
+                    if (idjela != (int)dgwSeSastoji.SelectedRows[0].Cells[0].Value || idsastojka != (int)dgwSeSastoji.SelectedRows[0].Cells[1].Value)
+                    {
+                        foreach (DataRow dr in dsPodaci.Tables["seSastoji"].Rows)
+                            if ((int)dr["id_jela"] == idjela && (int)dr["id_sastojka"] == idsastojka)
+                            {
+                                MsgBoxError("Vec postoji objekat sa tim identitetom! Unesite drugacije ID-jeve!");
+                                return;
+                            }
+                    }
                     foreach (DataRow dr in dsPodaci.Tables["seSastoji"].Rows)
                     {
                         if (dr["id_sastojka"].ToString() == dgwNaMeniju.SelectedRows[0].Cells[0].Value.ToString() && dr["id_jela"].ToString() == dgwNaMeniju.SelectedRows[0].Cells[1].Value.ToString())
@@ -575,7 +674,9 @@ namespace Klijent
         {
             try
             {
+                // Serveru se prosledjuje vrednost korisnicke kontrole, a on vraca rezultate upita u listi jela
                 List<Jelo> pretraga = proxy.jelaNaMenijimaKojiSuAktivniSaCenom(int.Parse(txtCenaSpecPretraga.Text));
+                // Rezultati se prikazuju u dgw-u
                 dgwSpecijalnaPretraga.DataSource = pretraga;
             }
             catch (Exception exc)
@@ -588,6 +689,7 @@ namespace Klijent
         {
             try
             {
+                // -||-linija 673
                 List<Jelo> pretraga = proxy.jelaPremaBrojuSastojaka(int.Parse(txtBrojSastojakaJela.Text));
                 dgwSpecijalnaPretraga.DataSource = pretraga;
             }
@@ -601,6 +703,7 @@ namespace Klijent
         {
             try
             {
+                // -||-linija 673
                 List<Jelo> pretraga = proxy.jelaPremaMeniju(obradiComboBoxItem(cbMeniJelaPrema.SelectedItem));
                 dgwSpecijalnaPretraga.DataSource = pretraga;
             }
@@ -614,6 +717,7 @@ namespace Klijent
         {
             try
             {
+                // -||-linija 673
                 List<Jelo> pretraga = proxy.jelaPremaSastojku(obradiComboBoxItem(cbSastojakJelaPrema.SelectedItem));
                 dgwSpecijalnaPretraga.DataSource = pretraga;
             }
@@ -625,6 +729,7 @@ namespace Klijent
 
         private void cbIzaberiteTabelu_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Prema vrednosti selekcije tabele, drugi comboBox se ispunjava poljima te tabele
             switch (cbIzaberiteTabelu.SelectedIndex) 
             {
                 case 0:
@@ -662,24 +767,73 @@ namespace Klijent
 
         private void btnPretraziParametri_Click(object sender, EventArgs e)
         {
+            // Prvo se proverava da li je ijedan element izabran kao parametar, jer je to neophodno za pretragu
             if (cbIzaberiteParametar.SelectedItem != null)
             {
+                // Podaci se uzimaju iz kontrola
                 string tabela = cbIzaberiteTabelu.SelectedItem.ToString();
-                // Ova promenljiva sluzi da bi funkcija TryParse radila (tu postoji da bi proverila da li je string broj)
-                int n;
                 string polje = cbIzaberiteParametar.SelectedItem.ToString();
-                string vrednost = txtVrednostParametra.Text;
+                // Pravi se klon tabele koju je korisnik izabrao da pretrazuje
                 DataTable podaci = dsPodaci.Tables[tabela].Clone();
+                // Tabela se prazni radi unosa podataka
                 podaci.Clear();
-                foreach (DataRow dr in dsPodaci.Tables[tabela].Rows)
+                // Proverava se da li se pretrazuje "aktivan" polje tabele meni
+                // Ono je posebno jer ima poseban nacin za unos parametra pretrage (checkBox)
+                // Stoga ako je checkBox aktivan pretraga se vrsi na drugaciji nacin
+                if (chbAktivanPretraga.Enabled)
                 {
-                    if(!int.TryParse(dr[polje].ToString(), out n) && dr[polje].ToString().ToLower() != "false" && dr[polje].ToString().ToLower() != "true")
-                        if (dr[polje].ToString().Contains(vrednost))
+                    foreach (DataRow dr in dsPodaci.Tables[tabela].Rows)
+                    {
+                        if ((bool)dr["aktivan"] == chbAktivanPretraga.Checked)
                             podaci.ImportRow(dr);
+                    }
                 }
+                else
+                {
+                    // Ako nije pretrazuje se sa vrednoscu iz textBox-a
+                    string vrednost = txtVrednostParametra.Text;
+                    if (polje == "naziv_menija" || polje == "naziv_jela" || polje == "opis_jela" || polje == "naziv_sastojka" || polje == "opis_sastojka")
+                    {
+                        // Ako je polje koje je korisnik izabrao jedno od polja sa tekstualnom vrednoscu
+                        // Pretraga se vrsi pomocu funkcije Contains() koja proverava da li string sadrzi drugi string
+                        foreach (DataRow dr in dsPodaci.Tables[tabela].Rows)
+                        {
+                            if (dr[polje].ToString().Contains(vrednost.Trim()))
+                                podaci.ImportRow(dr);
+                        }
+                    }
+                    else
+                    {
+                        // Ako nije ni to, onda je polje koje se pretrazuje integer i pretrazuje se preko pretvaranja u string   
+                        foreach (DataRow dr in dsPodaci.Tables[tabela].Rows)
+                        {
+                            if (dr[polje].ToString() == vrednost.Trim())
+                                podaci.ImportRow(dr);
+                        }
+                    }
+                }
+                // Podaci se prikazuju u dgw-u
                 dgwPretragaPoParametrima.DataSource = podaci;
             }
+            else
+                MsgBoxError("Prvo morate izabrati parametar da biste pretrazivali po njemu!");
         }
         #endregion
+
+        private void cbIzaberiteParametar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Svaki put kada korisnik izabere novi parametar, proverava se da li je to parametar "atktivan"
+            // Ako jeste, checkBox postaje aktivan a textBox neaktivan i obrnuto
+            if (cbIzaberiteParametar.SelectedItem.ToString() == "aktivan")
+            {
+                txtVrednostParametra.Enabled = false;
+                chbAktivanPretraga.Enabled = true;
+            }
+            else
+            {
+                txtVrednostParametra.Enabled = true;
+                chbAktivanPretraga.Enabled = false;
+            }
+        }
     }
 }
