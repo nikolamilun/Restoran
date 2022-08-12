@@ -25,6 +25,8 @@ namespace Klijent
         static IRestoran proxy;
         // DataSet kojim se manipulise podacima u celoj formi
         DataSet dsPodaci;
+        // Oznacava da li se korisnik uspesno ulogovao
+        bool logged = false;
         public GlavnaForma()
         {
             InitializeComponent();
@@ -32,7 +34,7 @@ namespace Klijent
 
         #region Pomocne funkcije
         // Operacije koje se cesto koriste sam smestio u funkcije
-        private void MsgBoxError(string errorMsg)
+        public static void MsgBoxError(string errorMsg)
         {
             // Prikazivanje errora korisniku sa unesenim tekstom
             MessageBox.Show(errorMsg, "Greska!", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -96,6 +98,15 @@ namespace Klijent
 
         private void GlavnaForma_Load(object sender, EventArgs e)
         {
+            // Forma za logovanje i provera uspesnosti logovanja
+            Login lg = new Login();
+            lg.ShowDialog();
+            logged = lg.logged;
+            if (!logged)
+            {
+                Close();
+                return; 
+            }
             // Otvaranje proksija za serverske radnje
             ChannelFactory<IRestoran> chf  = new ChannelFactory<IRestoran>(new BasicHttpBinding(), new EndpointAddress("http://localhost:8000"));
             proxy = chf.CreateChannel();
@@ -120,8 +131,10 @@ namespace Klijent
         {
             try
             {
-                // Podaci se salju serveru radi upisa u bazu podataka
-                proxy.vratiDataSet(dsPodaci);
+               // Provera da li je logovanje izvrseno (za slucaj da se forma zatvori pri logovanju)
+               if(logged)
+                    // Podaci se salju serveru radi upisa u bazu podataka
+                    proxy.vratiDataSet(dsPodaci);
             }
             catch (Exception exc)
             {
@@ -139,40 +152,52 @@ namespace Klijent
         // Kontrole se popunjavaju podacima iz izabranog reda
         private void dgwMeni_SelectionChanged(object sender, EventArgs e)
         {
-            // Kontrole za uredjivanje tabele meni se pune podacima iz izabranog reda u dgw-u
-            txtIDMenijaMeni.Text = dgwMeni.SelectedRows[0].Cells[0].Value.ToString();
-            txtNazivMenijaMeni.Text = dgwMeni.SelectedRows[0].Cells[1].Value.ToString();
-            chbMeniAktivanMeni.Checked = (bool)dgwMeni.SelectedRows[0].Cells[2].Value;
+            if (dgwMeni.SelectedRows.Count != 0)
+            {
+                // Kontrole za uredjivanje tabele meni se pune podacima iz izabranog reda u dgw-u
+                txtIDMenijaMeni.Text = dgwMeni.SelectedRows[0].Cells[0].Value.ToString();
+                txtNazivMenijaMeni.Text = dgwMeni.SelectedRows[0].Cells[1].Value.ToString();
+                chbMeniAktivanMeni.Checked = (bool)dgwMeni.SelectedRows[0].Cells[2].Value;
+            }
         }
 
         private void dgwJelo_SelectionChanged(object sender, EventArgs e)
         {
-            // Kontrole za uredjivanje tabele jelo se pune podacima iz izabranog reda u dgw-u
-            txtIDJelaJelo.Text = dgwJelo.SelectedRows[0].Cells[0].Value.ToString();
-            txtNazivJelaJelo.Text = dgwJelo.SelectedRows[0].Cells[1].Value.ToString();
-            txtOpisJelaJelo.Text = dgwJelo.SelectedRows[0].Cells[2].Value.ToString();
+            if (dgwJelo.SelectedRows.Count != 0)
+            {
+                // Kontrole za uredjivanje tabele jelo se pune podacima iz izabranog reda u dgw-u
+                txtIDJelaJelo.Text = dgwJelo.SelectedRows[0].Cells[0].Value.ToString();
+                txtNazivJelaJelo.Text = dgwJelo.SelectedRows[0].Cells[1].Value.ToString();
+                txtOpisJelaJelo.Text = dgwJelo.SelectedRows[0].Cells[2].Value.ToString();
+            }
         }
 
         private void dgwSastojak_SelectionChanged(object sender, EventArgs e)
         {
-            // Kontrole za uredjivanje tabele "se sastoji" se pune podacima iz izabranog reda u dgw-u
-            txtIDSastojkaSastojak.Text = dgwSastojak.SelectedRows[0].Cells[0].Value.ToString();
-            txtNazivSastojkaSastojak.Text = dgwSastojak.SelectedRows[0].Cells[1].Value.ToString();
-            txtOpisSastojkaSastojak.Text = dgwSastojak.SelectedRows[0].Cells[2].Value.ToString();
+            if (dgwSastojak.SelectedRows.Count != 0)
+            {
+                // Kontrole za uredjivanje tabele "se sastoji" se pune podacima iz izabranog reda u dgw-u
+                txtIDSastojkaSastojak.Text = dgwSastojak.SelectedRows[0].Cells[0].Value.ToString();
+                txtNazivSastojkaSastojak.Text = dgwSastojak.SelectedRows[0].Cells[1].Value.ToString();
+                txtOpisSastojkaSastojak.Text = dgwSastojak.SelectedRows[0].Cells[2].Value.ToString();
+            }
         }
 
         private void dgwNaMeniju_SelectionChanged(object sender, EventArgs e)
         {
-            // U kontrolama se prikazuju iazbrane vrednosti
-            foreach(object sel in cbIDMenijaNaMeniju.Items)
-                // Proverava se da li je ID iz reda comboBox-a isti kao i ID izabranog reda u dgw-u
-                if(obradiComboBoxItem(sel) == (int)dgwNaMeniju.SelectedRows[0].Cells[0].Value)
-                    cbIDMenijaNaMeniju.SelectedItem = sel;
-            foreach (object sel in cbIDJelaNaMeniju.Items)
-                if (obradiComboBoxItem(sel) == (int)dgwNaMeniju.SelectedRows[0].Cells[1].Value)
-                    // -||- linija 161
-                    cbIDJelaNaMeniju.SelectedItem = sel;
-            txtCenaNaMeniju.Text = dgwNaMeniju.SelectedRows[0].Cells[2].Value.ToString();
+            if (dgwNaMeniju.SelectedRows.Count != 0)
+            {
+                // U kontrolama se prikazuju iazbrane vrednosti
+                foreach (object sel in cbIDMenijaNaMeniju.Items)
+                    // Proverava se da li je ID iz reda comboBox-a isti kao i ID izabranog reda u dgw-u
+                    if (obradiComboBoxItem(sel) == (int)dgwNaMeniju.SelectedRows[0].Cells[0].Value)
+                        cbIDMenijaNaMeniju.SelectedItem = sel;
+                foreach (object sel in cbIDJelaNaMeniju.Items)
+                    if (obradiComboBoxItem(sel) == (int)dgwNaMeniju.SelectedRows[0].Cells[1].Value)
+                        // -||- linija 161
+                        cbIDJelaNaMeniju.SelectedItem = sel;
+                txtCenaNaMeniju.Text = dgwNaMeniju.SelectedRows[0].Cells[2].Value.ToString();
+            }
         }
 
         private void dgwSeSastoji_SelectionChanged(object sender, EventArgs e)
@@ -443,7 +468,7 @@ namespace Klijent
                 dr["id_sastojka"] = id;
                 dr["naziv_sastojka"] = naziv;
                 dr["opis_sastojka"] = opis;
-                dsPodaci.Tables["sastojak"].Rows.Add(dr);
+                dsPodaci.Tables["sastojci"].Rows.Add(dr);
                 dgwSastojak.DataSource = dsPodaci.Tables["sastojci"];
                 osveziKontroleSpecPretraga();
                 osveziKontroleSeSastoji();
@@ -735,6 +760,7 @@ namespace Klijent
                 case 0:
                     {
                         cbIzaberiteParametar.DataSource = PoljaJela.GetNames(typeof(PoljaJela));
+                        
                         break;
                     }
                 case 1:
@@ -822,7 +848,7 @@ namespace Klijent
 
         private void cbIzaberiteParametar_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Svaki put kada korisnik izabere novi parametar, proverava se da li je to parametar "atktivan"
+            // Svaki put kada korisnik izabere novi parametar, proverava se da li je to parametar "aktivan"
             // Ako jeste, checkBox postaje aktivan a textBox neaktivan i obrnuto
             if (cbIzaberiteParametar.SelectedItem.ToString() == "aktivan")
             {
